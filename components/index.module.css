@@ -1,0 +1,26 @@
+.hidden {
+    display: none;
+}
+
+.rootContainer { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.contentContainer {
+    max-width: 956px;
+    margin: auto;
+}
+
+.header {
+    font-family: 'BarlowSemiBoldItalic'; font-size: 48px;
+    color: white;
+    text-shadow: 2px 2px #000;
+    text-align: right;
+}
+
+.workContainer {
+
+}

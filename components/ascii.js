@@ -14,7 +14,7 @@ class AsciiEffect {
 
 		// Some ASCII settings
 
-		const fResolution = options[ 'resolution' ] || 0.15; // Higher for more details
+		const fResolution = options[ 'resolution' ] || 0.12; // Higher for more details
 		const iScale = options[ 'scale' ] || 1;
 		const bColor = options[ 'color' ] || false; // nice but slows down rendering!
 		const bAlpha = options[ 'alpha' ] || false; // Transparency
@@ -179,7 +179,7 @@ class AsciiEffect {
 
 			oCtx.clearRect( 0, 0, iWidth, iHeight );
 			oCtx.drawImage( oCanvasImg, 0, 0, iWidth, iHeight );
-			const oImgData = oCtx.getImageData( 0, 0, iWidth, iHeight ).data;
+			const oImgData = oCtx.getImageData( 0, 0, iWidth, iHeight, ).data;
 
 			// Coloring loop starts now
 			let strChars = '';
