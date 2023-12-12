@@ -4,11 +4,22 @@
 }
 
 @font-face {
-    font-family: BarlowSemiBoldItalic;
-    src: url(/fonts/BarlowSemiCondensed-SemiBoldItalic.ttf);
-  }
+  font-family: BarlowSemiBoldItalic;
+  src: url(/fonts/BarlowSemiCondensed-SemiBoldItalic.ttf);
+}
+
+@font-face {
+  font-family: BarlowBold;
+  src: url(/fonts/BarlowSemiCondensed-Bold.ttf);
+}
+
+@font-face {
+  font-family: BarlowBoldItalic;
+  src: url(/fonts/BarlowSemiCondensed-BoldItalic.ttf);
+}
 
 body {
   margin: 0;
   overflow-x: hidden;
+  background-color: #1f212a;
 }

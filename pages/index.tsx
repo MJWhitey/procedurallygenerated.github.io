@@ -18,12 +18,25 @@ const MAX_SCREEN_HEIGHT = 1080;
 export default function Main() {
   const video = useRef();
   const ctx = useRef();
+  const [state, setState] = useState({
+    screen: {
+      width: 956,
+      height: 400,
+    },
+  });
 
   useEffect(() => {
     init_three();
     //init_three_video();
     animate();
-    if (video.current) video.current.play();
+    if (video.current && video.current.muted) video.current.play();
+    setState((prev) => ({
+      ...prev,
+      screen: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      },
+    }));
   }, []);
 
   function draw_video() {
@@ -43,8 +56,11 @@ export default function Main() {
       <video
         id="video"
         ref={video}
-        loop
+        playsinline
+        autoplay
+        defaultMuted
         muted
+        loop
         crossOrigin="anonymous"
         style={{ width: "500px", height: "500px" }}
         className={styles.hidden}
@@ -58,8 +74,33 @@ export default function Main() {
         height="500"
       ></canvas>
       <div id="root" className={styles.rootContainer}>
-        <div className={styles.contentContainer}>
-          <h1 className={styles.header}>I build technology products that deliver meaningful outcomes for businesses and their customers.</h1>
+        <div id="header" className={styles.headerContainer}>
+          <div
+            className={styles.contentContainer}
+            style={{
+              width: state.screen.width,
+              height: state.screen.height - 30,
+            }}
+          >
+            <div style={{ flex: 1 }}>
+              <h2 className={styles.header}>
+                I build technology
+                <br /> products that deliver
+                <br />
+                <strong>meaningful</strong> outcomes
+                <br />
+                for businesses and
+                <br />
+                their customers.
+              </h2>
+            </div>
+            <div style={{ marginBottom: 60 }}>
+              <h2 className={styles.headerTitle}>Matthew White</h2>
+              <h3 className={styles.headerTitle}>
+                Engineering Lead & Software Developer
+              </h3>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -119,7 +160,7 @@ function init_three_video() {
 
   effect = new AsciiEffect(renderer, " .:-+*=%@#", { invert: false });
   effect.setSize(window.innerWidth, window.innerHeight);
-  effect.domElement.style.color = "#6a6c77";
+  effect.domElement.style.color = "#444654";
   effect.domElement.style.backgroundColor = "#1f212a";
 
   //document.body.appendChild(effect.domElement);
@@ -128,39 +169,23 @@ function init_three_video() {
   // document.addEventListener("pointerdown", onPointerDown);
   // document.addEventListener("pointermove", onPointerMove);
   // document.addEventListener("pointerup", onPointerUp);
-  // window.addEventListener("resize", onWindowResize);
+  window.addEventListener("resize", onWindowResize);
 
   //
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  effect.setSize(window.innerWidth, window.innerHeight);
 }
 
 function init_three() {
   camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
-  // camera = new THREE.PerspectiveCamera(
-  //   70,
-  //   window.innerWidth / window.innerHeight,
-  //   1,
-  //   1000
-  // );
-  // //camera.position.y = 150;
-  // camera.position.z = 200;
-
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0, 0, 0);
-
-  const pointLight1 = new THREE.PointLight(0xffffff, 3, 0, 0);
-  pointLight1.position.set(500, 500, 500);
-  scene.add(pointLight1);
-
-  const pointLight2 = new THREE.PointLight(0xffffff, 1, 0, 0);
-  pointLight2.position.set(-500, -500, -500);
-  scene.add(pointLight2);
-
-  // sphere = new THREE.Mesh(
-  //   new THREE.SphereGeometry(200, 20, 10),
-  //   new THREE.MeshPhongMaterial({ flatShading: true })
-  // );
-  // scene.add(sphere);
 
   const video: HTMLVideoElement = document.getElementById(
     "video"
