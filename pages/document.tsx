@@ -1,15 +1,20 @@
 import React from "react";
 import { Html, Head, Main, NextScript } from "next/document";
 
+import { Viewport } from 'next'
+ 
+export const viewport : Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  // Also supported by less commonly used
+  // interactiveWidget: 'resizes-visual',
+}
+
 export default function Document() {
   return (
     <Html>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css?family=Barlow Condensed"
-          rel="stylesheet"
-        />
-      </Head>
+      <Head />
       <body>
         <Main />
         <NextScript />

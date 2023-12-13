@@ -28,6 +28,13 @@
     margin: 0;
 }
 
+@media screen and (max-width: 768px){
+    .header {
+        font-size: 24px;
+        margin-right: 30px;
+    }
+}
+
 .headerTitle {
     margin: 0;
 }
@@ -38,17 +45,28 @@ h2.headerTitle  {
     text-shadow: 2px 2px #000;
 }
 
+@media screen and (max-width: 768px){
+    h2.headerTitle {
+        font-size: 36px;
+        margin-left: 30px;
+    }
+}
+
 h3.headerTitle  {
     font-family: 'BarlowSemiBold'; font-size: 26px;
     color: white;
     text-shadow: 2px 2px #000;
 }
 
+@media screen and (max-width: 768px){
+    h3.headerTitle {
+        font-size: 14px;
+        margin-left: 30px;
+    }
+}
+
+
 
 .header strong  {
     color: #96e2a4;
-}
-
-.workContainer {
-
 }

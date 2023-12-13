@@ -2,22 +2,18 @@ import { useEffect } from "react";
 import * as THREE from "three";
 import { AsciiEffect } from "../components/ascii";
 
-import React, { useRef, useState } from "react";
-import { createRoot } from "react-dom/client";
-import { Asciify, readFromCanvas } from "@sister.software/asciify";
-import { Canvas, useFrame, ThreeElements } from "@react-three/fiber";
+import React, { useState } from "react";
 import styles from "../components/index.module.css";
+import Work from "../components/work";
 //import Head from 'next/head'
 
-let camera, controls, scene, renderer, effect;
-let sphere, plane;
-const start = Date.now();
-const MAX_SCREEN_WIDTH = 1920;
-const MAX_SCREEN_HEIGHT = 1080;
+let camera, scene, renderer, effect;
+let plane;
+const DESIGN_OVERLAP_BUFFER = 40;
 
 export default function Main() {
-  const video = useRef();
-  const ctx = useRef();
+  const video = React.useRef<HTMLVideoElement>();
+  const ctx = React.useRef<HTMLCanvasElement>()
   const [state, setState] = useState({
     screen: {
       width: 956,
@@ -26,10 +22,9 @@ export default function Main() {
   });
 
   useEffect(() => {
-    init_three();
-    //init_three_video();
+    initThreeVideoEffect();
     animate();
-    if (video.current && video.current.muted) video.current.play();
+    if (video.current && video.current.muted && !isVideoPlaying()) video.current.play();
     setState((prev) => ({
       ...prev,
       screen: {
@@ -37,28 +32,41 @@ export default function Main() {
         height: window.innerHeight,
       },
     }));
+    window.addEventListener("resize", onWindowResize);
   }, []);
 
-  function draw_video() {
-    if (!ctx.current && !ctx.current.getContext("2d")) return;
-    ctx.current.getContext("2d").drawImage(video.current, 0, 0, 500, 500);
+  function animate() {
+    requestAnimationFrame(animate);
+    render();
   }
 
-  function animate() {
-    // requestAnimationFrame( animate );
-    requestAnimationFrame(animate);
-    //draw_video();
-    render();
+  function isVideoPlaying() { 
+    return video.current && !!(video.current.currentTime > 0 && !video.current.paused && !video.current.ended && video.current.readyState > 2);
+  }
+
+  function onWindowResize() {
+    const { width, height } = getWindowSize();
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+    effect.setSize(width, height);
+    setState((prev) => ({
+      ...prev,
+      screen: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      },
+    }));
   }
 
   return (
     <div>
       <video
         id="video"
-        ref={video}
-        playsinline
-        autoplay
-        defaultMuted
+        ref={video as React.RefObject<HTMLVideoElement>}
+        playsInline
+        autoPlay
+        //defaultmuted="true" // eslint-disable-line
         muted
         loop
         crossOrigin="anonymous"
@@ -69,7 +77,7 @@ export default function Main() {
       </video>
       <canvas
         className={styles.hidden}
-        ref={ctx}
+        ref={ctx as React.RefObject<HTMLCanvasElement>}
         width="500"
         height="500"
       ></canvas>
@@ -102,90 +110,39 @@ export default function Main() {
             </div>
           </div>
         </div>
+        <Work />
       </div>
     </div>
   );
 }
 
+// function getWindowSize() {
+//   let width = window.innerWidth;
+//   let height = window.innerHeight;
+
+//   if (width >= MAX_SCREEN_WIDTH) width = MAX_SCREEN_WIDTH;
+//   if (height >= MAX_SCREEN_HEIGHT) height = MAX_SCREEN_HEIGHT;
+
+//   return {
+//     width,
+//     height,
+//   };
+// }
+
 function getWindowSize() {
-  let width = window.innerWidth;
-  let height = window.innerHeight;
-
-  if (width >= MAX_SCREEN_WIDTH) width = MAX_SCREEN_WIDTH;
-  if (height >= MAX_SCREEN_HEIGHT) height = MAX_SCREEN_HEIGHT;
-
+  const width = window.innerWidth;
+  const height = window.innerHeight + DESIGN_OVERLAP_BUFFER;
   return {
     width,
     height,
   };
 }
 
-function init_three_video() {
-  //const container = document.getElementById("container");
-
-  camera = new THREE.PerspectiveCamera(
-    70,
-    window.innerWidth / window.innerHeight,
-    1,
-    1000
-  );
-
-  scene = new THREE.Scene();
-
-  // const geometry = new THREE.SphereGeometry(5, 60, 40);
-  // // invert the geometry on the x-axis so that all of the faces point inward
-  // geometry.scale(-1, 1, 1);
-
-  const geometry = new THREE.PlaneGeometry(400, 400);
-
-  const video: HTMLVideoElement = document.getElementById(
-    "video"
-  ) as HTMLVideoElement;
-  //video.play();
-
-  const texture = new THREE.VideoTexture(video);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  const material = new THREE.MeshBasicMaterial({ map: texture });
-
-  const mesh = new THREE.Mesh(
-    new THREE.PlaneGeometry(400, 400),
-    new THREE.MeshBasicMaterial({ color: 0xe0e0e0 })
-  );
-  mesh.quaternion.copy(camera.quaternion);
-  scene.add(mesh);
-
-  renderer = new THREE.WebGLRenderer();
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  effect = new AsciiEffect(renderer, " .:-+*=%@#", { invert: false });
-  effect.setSize(window.innerWidth, window.innerHeight);
-  effect.domElement.style.color = "#444654";
-  effect.domElement.style.backgroundColor = "#1f212a";
-
-  //document.body.appendChild(effect.domElement);
-  document.body.appendChild(renderer.domElement);
-
-  // document.addEventListener("pointerdown", onPointerDown);
-  // document.addEventListener("pointermove", onPointerMove);
-  // document.addEventListener("pointerup", onPointerUp);
-  window.addEventListener("resize", onWindowResize);
-
-  //
-}
-
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  effect.setSize(window.innerWidth, window.innerHeight);
-}
-
-function init_three() {
+function initThreeVideoEffect(asciiActive = true) {
   camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0, 0, 0);
+  const {width, height} = getWindowSize();
 
   const video: HTMLVideoElement = document.getElementById(
     "video"
@@ -198,34 +155,24 @@ function init_three() {
     new THREE.PlaneGeometry(2, 2),
     new THREE.MeshBasicMaterial({ map: texture })
   );
-  //plane.position.y = -200;
-  //plane.rotation.x = -Math.PI / 2;
   scene.add(plane);
 
   renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(width, height);
 
-  effect = new AsciiEffect(renderer, " .:-+*=%@#", { invert: false });
-  effect.setSize(window.innerWidth, window.innerHeight);
-  effect.domElement.style.color = "#6a6c77";
-  effect.domElement.style.backgroundColor = "#1f212a";
-
-  // Special case: append effect.domElement, instead of renderer.domElement.
-  // AsciiEffect creates a custom domElement (a div container) where the ASCII elements are placed.
-
-  document.body.appendChild(effect.domElement);
-  //document.body.appendChild(renderer.domElement);
+  if (asciiActive) {
+    effect = new AsciiEffect(renderer, " .:-+*=%@#", { invert: false });
+    effect.setSize(width, height);
+    effect.domElement.style.color = "#6a6c77";
+    effect.domElement.style.backgroundColor = "#1f212a";
+    // Special case: append effect.domElement, instead of renderer.domElement.
+    // AsciiEffect creates a custom domElement (a div container) where the ASCII elements are placed.
+    document.body.appendChild(effect.domElement);
+  } else {
+    document.body.appendChild(renderer.domElement);
+  }
 }
 
 function render() {
-  // const timer = Date.now() - start;
-
-  // sphere.position.y = Math.abs(Math.sin(timer * 0.002)) * 150;
-  // sphere.rotation.x = timer * 0.0003;
-  // sphere.rotation.z = timer * 0.0002;
-
-  //controls.update();
-
-  effect.render(scene, camera);
-  //renderer.render(scene, camera);
+  effect ? effect.render(scene, camera) : renderer.render(scene, camera);
 }

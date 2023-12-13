@@ -1,4 +1,9 @@
 @font-face {
+    font-family: BarlowRegular;
+    src: url(/fonts/BarlowSemiCondensed-Regular.ttf);
+  }
+
+@font-face {
   font-family: BarlowSemiBold;
   src: url(/fonts/BarlowSemiCondensed-SemiBold.ttf);
 }

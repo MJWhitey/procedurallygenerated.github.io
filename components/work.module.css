@@ -1,0 +1,64 @@
+.componentContainer {
+    max-width: 956px;
+    margin: auto;
+}
+
+.workContainer {
+    background-color: #dddee6;
+    border-radius: 84px 84px 0 0;
+    padding-top: 80px;
+}
+
+.workContainer h1 {
+    font-family: 'BarlowBoldItalic';
+    font-size: 60px;
+    margin: 48px 0;
+}
+
+.workContainer p {
+    font-family: 'BarlowRegular';
+    font-size: 20px;
+    line-height: 28px;
+    color: #3c3f50;
+    text-align: center;
+}
+
+.workContainer hr {
+    color: black;
+    width: 100%;
+    margin: 0 0 60px 0;
+    padding: 0;
+}
+
+.gridRow {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: space-evenly;
+}
+
+.gridItem {
+    flex: 1;
+    height: 310px;
+}
+
+@media screen and (max-width: 768px){
+    .workContainer {
+        border-radius: 42px 42px 0 0;
+        padding: 30px;
+    }
+
+    .workContainer h1 {
+        font-size: 30px;
+        margin: 24px 0;
+    }
+
+    .workContainer hr {
+        margin: 0 0 35px 0;
+    }
+
+    .workContainer p {
+        font-size: 16px;
+    }
+}
