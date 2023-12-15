@@ -1,7 +1,12 @@
 {
     "data" : [
         {
-            "title" : "Ready Attention Go"
+            "title" : "Ready Attention Go",
+            "technology" : [
+                "Unity",
+                "Spine",
+                "Cross-Platform"
+            ]
         },
         {
             "title" : "Hello #2"

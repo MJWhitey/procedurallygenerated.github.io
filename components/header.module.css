@@ -1,0 +1,106 @@
+.headerContainer {
+  padding-top: 30px;
+}
+
+.headerMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 768px) {
+  .headerMenu {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.menuContainer button {
+  font-family: "BarlowBold";
+  font-size: 30px;
+  color: #111115;
+  background-color: #dddee6;
+  border-radius: 10px;
+  border: none;
+  height: 65px;
+  padding: 0 20px;
+  margin: 0 10px;
+}
+
+.menuContainer button:hover {
+  background-color: #96e2a4;
+}
+
+@media screen and (max-width: 768px) {
+    .menuContainer button {
+      font-size: 24px;
+    }
+  }
+
+@media screen and (max-width: 768px) {
+  .titleContainer {
+    margin-bottom: 30px;
+    width: 100%;
+  }
+}
+
+.header {
+  font-family: "BarlowBoldItalic";
+  font-size: 48px;
+  color: #e4e4e4;
+  text-shadow: 2px 2px #000;
+  text-align: right;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    font-size: 24px;
+    margin-right: 30px;
+  }
+}
+
+.headerTitle {
+  margin: 0;
+}
+
+h2.headerTitle {
+  font-family: "BarlowBold";
+  font-size: 60px;
+  color: #e4e4e4;
+  text-shadow: 2px 2px #000;
+}
+
+@media screen and (max-width: 768px) {
+  h2.headerTitle {
+    font-size: 36px;
+    margin-left: 30px;
+  }
+}
+
+h3.headerTitle {
+  font-family: "BarlowSemiBold";
+  font-size: 26px;
+  color: #e4e4e4;
+  text-shadow: 2px 2px #000;
+}
+
+@media screen and (max-width: 768px) {
+  h3.headerTitle {
+    font-size: 14px;
+    margin-left: 30px;
+  }
+}
+
+.header strong {
+  color: #96e2a4;
+}

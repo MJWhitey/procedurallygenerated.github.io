@@ -24,6 +24,7 @@
     "@react-three/fiber": "^8.15.11",
     "@sister.software/asciify": "^3.1.3",
     "@types/three": "^0.158.3",
+    "gsap": "^3.12.4",
     "next": "^14.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

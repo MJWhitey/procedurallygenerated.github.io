@@ -1,27 +1,58 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./work.module.css";
 import Data from "../constants/work.json";
+import gsap from "gsap";
 
 const IMAGE_ASSETS_PATH = "/images/";
+
+interface WorkItemProps {
+  data;
+}
+
+function WorkItem({ data }: WorkItemProps) {
+  const overlay = useRef<HTMLDivElement>();
+
+  function onItemOver(): void {
+    gsap.to(overlay.current as gsap.TweenTarget, { y: -310 });
+  }
+
+  function onItemOff(): void {
+    gsap.to(overlay.current as gsap.TweenTarget, { y: 0 });
+  }
+
+  return (
+    <div
+      className={styles.workItem}
+      style={{
+        backgroundImage: `url(${IMAGE_ASSETS_PATH + "tint_blue_rago.png"})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+      onMouseOver={onItemOver}
+      onMouseLeave={onItemOff}
+    >
+      <div className={styles.workItemTitle}>
+        <h2>{data.title}</h2>
+      </div>
+      <div
+        ref={overlay as React.RefObject<HTMLDivElement>}
+        className={styles.workItemOverlay}
+      >
+        <h2 className={styles.overlayTitle}>{data.title}</h2>
+      </div>
+    </div>
+  );
+}
 
 function WorkGrid() {
   const GRID_COLUMNS = 3;
 
-  const renderRow = (data) => {
+  const renderRow = (data, _k) => {
     const row: React.ReactElement[] = [];
+    let k = 0;
     data.forEach((item) => {
-      const element = (
-        <div
-          className={styles.gridItem}
-          style={{
-            backgroundImage: `url(${IMAGE_ASSETS_PATH + "tint_blue_rago.png"})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
-        >
-          <h2>{item.title}</h2>
-        </div>
-      );
+      k++;
+      const element = <WorkItem data={item} key={k} />;
       row.push(element);
     });
 
@@ -29,22 +60,25 @@ function WorkGrid() {
     console.log(row.length, GRID_COLUMNS);
     if (row.length < GRID_COLUMNS) {
       for (let i = 0; i < GRID_COLUMNS - row.length; i++) {
-        row.push(<div className={styles.gridItem}></div>);
+        k++
+        row.push(<div className={styles.spacerItem} key={k}></div>);
       }
     }
 
-    return <div className={styles.gridRow}>{row}</div>;
+    return <div className={styles.gridRow} key={_k}>{row}</div>;
   };
 
   const renderRows = (data) => {
     const rows: React.ReactElement[] = [];
     let _data: string[] = [];
+    let k=0;
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       _data.push(item);
       //console.log(i, i % 3 === 0 ,  i === data.length - 1 )
       if ((i + 1) % GRID_COLUMNS === 0 || i === data.length - 1) {
-        rows.push(renderRow(_data));
+        k++;
+        rows.push(renderRow(_data, k));
         _data = [];
       }
     }

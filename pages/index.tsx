@@ -5,7 +5,7 @@ import { AsciiEffect } from "../components/ascii";
 import React, { useState } from "react";
 import styles from "../components/index.module.css";
 import Work from "../components/work";
-//import Head from 'next/head'
+import Header from "../components/header";
 
 let camera, scene, renderer, effect;
 let plane;
@@ -82,34 +82,7 @@ export default function Main() {
         height="500"
       ></canvas>
       <div id="root" className={styles.rootContainer}>
-        <div id="header" className={styles.headerContainer}>
-          <div
-            className={styles.contentContainer}
-            style={{
-              width: state.screen.width,
-              height: state.screen.height - 30,
-            }}
-          >
-            <div style={{ flex: 1 }}>
-              <h2 className={styles.header}>
-                I build technology
-                <br /> products that deliver
-                <br />
-                <strong>meaningful</strong> outcomes
-                <br />
-                for businesses and
-                <br />
-                their customers.
-              </h2>
-            </div>
-            <div style={{ marginBottom: 60 }}>
-              <h2 className={styles.headerTitle}>Matthew White</h2>
-              <h3 className={styles.headerTitle}>
-                Engineering Lead & Software Developer
-              </h3>
-            </div>
-          </div>
-        </div>
+        <Header width={state.screen.width} height={state.screen.height}/>
         <Work />
       </div>
     </div>
