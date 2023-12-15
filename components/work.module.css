@@ -9,6 +9,10 @@
     padding-top: 80px;
 }
 
+.workGridContainer {
+    margin-top: 60px;
+}
+
 .workContainer h1 {
     font-family: 'BarlowBoldItalic';
     font-size: 60px;
@@ -41,6 +45,19 @@
 .gridItem {
     flex: 1;
     height: 310px;
+    margin: 0.5px;
+    display: flex;
+    align-items: center;
+}
+
+.gridItem h2 {
+    font-family: 'BarlowBold';
+    font-size: 24px;
+    color: white;
+    text-shadow: 2px 2px #000;
+    margin: 0;
+    flex: 1;
+    text-align: center;
 }
 
 @media screen and (max-width: 768px){
@@ -60,5 +77,16 @@
 
     .workContainer p {
         font-size: 16px;
+    }
+
+    .gridRow {
+        display: contents;
+    }
+
+    .gridItem {
+        flex: 1;
+        width: 100%;
+        height: 220px;
+        margin: 1px;
     }
 }
