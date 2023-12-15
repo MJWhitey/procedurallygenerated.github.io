@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./work.module.css";
 import Data from "../constants/work.json";
 import gsap from "gsap";
@@ -11,9 +11,15 @@ interface WorkItemProps {
 
 function WorkItem({ data }: WorkItemProps) {
   const overlay = useRef<HTMLDivElement>();
+  const overlayTitle = useRef<HTMLHeadingElement>();
+  const state = useState({
+    isOver: false,
+  });
 
   function onItemOver(): void {
-    gsap.to(overlay.current as gsap.TweenTarget, { y: -310 });
+    const tl = gsap.timeline();
+    tl.to(overlay.current as gsap.TweenTarget, { y: -310, duration: 0.4 });
+    tl.fromTo(overlayTitle.current as gsap.TweenTarget, { alpha: 0 }, {alpha: 1});
   }
 
   function onItemOff(): void {
@@ -38,7 +44,9 @@ function WorkItem({ data }: WorkItemProps) {
         ref={overlay as React.RefObject<HTMLDivElement>}
         className={styles.workItemOverlay}
       >
-        <h2 className={styles.overlayTitle}>{data.title}</h2>
+        <h2 ref={overlayTitle as React.RefObject<HTMLDivElement>}>
+          {data.title}
+        </h2>
       </div>
     </div>
   );
@@ -60,18 +68,22 @@ function WorkGrid() {
     console.log(row.length, GRID_COLUMNS);
     if (row.length < GRID_COLUMNS) {
       for (let i = 0; i < GRID_COLUMNS - row.length; i++) {
-        k++
+        k++;
         row.push(<div className={styles.spacerItem} key={k}></div>);
       }
     }
 
-    return <div className={styles.gridRow} key={_k}>{row}</div>;
+    return (
+      <div className={styles.gridRow} key={_k}>
+        {row}
+      </div>
+    );
   };
 
   const renderRows = (data) => {
     const rows: React.ReactElement[] = [];
     let _data: string[] = [];
-    let k=0;
+    let k = 0;
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
       _data.push(item);
