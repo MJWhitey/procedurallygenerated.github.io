@@ -1,6 +1,11 @@
 @font-face {
-    font-family: BarlowRegular;
+    font-family: BarlowSemiCondensed-Regular;
     src: url(/fonts/BarlowSemiCondensed-Regular.ttf);
+  }
+
+  @font-face {
+    font-family: BarlowSemiCondensed-Italic;
+    src: url(/fonts/BarlowSemiCondensed-Italic.ttf);
   }
 
 @font-face {

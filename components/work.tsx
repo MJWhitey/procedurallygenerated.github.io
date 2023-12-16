@@ -1,56 +1,8 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import styles from "./work.module.css";
 import Data from "../constants/work.json";
-import gsap from "gsap";
 
-const IMAGE_ASSETS_PATH = "/images/";
-
-interface WorkItemProps {
-  data;
-}
-
-function WorkItem({ data }: WorkItemProps) {
-  const overlay = useRef<HTMLDivElement>();
-  const overlayTitle = useRef<HTMLHeadingElement>();
-  const state = useState({
-    isOver: false,
-  });
-
-  function onItemOver(): void {
-    const tl = gsap.timeline();
-    tl.to(overlay.current as gsap.TweenTarget, { y: -310, duration: 0.4 });
-    tl.fromTo(overlayTitle.current as gsap.TweenTarget, { alpha: 0 }, {alpha: 1});
-  }
-
-  function onItemOff(): void {
-    gsap.to(overlay.current as gsap.TweenTarget, { y: 0 });
-  }
-
-  return (
-    <div
-      className={styles.workItem}
-      style={{
-        backgroundImage: `url(${IMAGE_ASSETS_PATH + "tint_blue_rago.png"})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-      onMouseOver={onItemOver}
-      onMouseLeave={onItemOff}
-    >
-      <div className={styles.workItemTitle}>
-        <h2>{data.title}</h2>
-      </div>
-      <div
-        ref={overlay as React.RefObject<HTMLDivElement>}
-        className={styles.workItemOverlay}
-      >
-        <h2 ref={overlayTitle as React.RefObject<HTMLDivElement>}>
-          {data.title}
-        </h2>
-      </div>
-    </div>
-  );
-}
+import WorkItem from "./work-item";
 
 function WorkGrid() {
   const GRID_COLUMNS = 3;
