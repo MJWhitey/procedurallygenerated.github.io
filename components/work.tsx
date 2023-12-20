@@ -17,7 +17,6 @@ function WorkGrid() {
     });
 
     // Add spacers
-    console.log(row.length, GRID_COLUMNS);
     if (row.length < GRID_COLUMNS) {
       for (let i = 0; i < GRID_COLUMNS - row.length; i++) {
         k++;

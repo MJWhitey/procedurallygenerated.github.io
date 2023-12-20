@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import * as THREE from "three";
 import { AsciiEffect } from "../components/ascii";
+import { useIntersectionObserver } from 'react-intersection-observer-hook';
 
 import React, { useState } from "react";
 import styles from "../components/index.module.css";
@@ -13,7 +14,11 @@ const DESIGN_OVERLAP_BUFFER = 40;
 
 export default function Main() {
   const video = React.useRef<HTMLVideoElement>();
-  const ctx = React.useRef<HTMLCanvasElement>()
+  const ctx = React.useRef<HTMLCanvasElement>();
+  //
+  const [target, { entry }] = useIntersectionObserver();
+  const isVisible = entry && entry.isIntersecting;
+  //
   const [state, setState] = useState({
     screen: {
       width: 956,
@@ -35,9 +40,21 @@ export default function Main() {
     window.addEventListener("resize", onWindowResize);
   }, []);
 
+  useEffect(() => {
+    console.log(`The component is ${isVisible ? 'visible' : 'not visible'}.`);
+    if (video.current && video.current.muted) {
+      if (!isVisible && isVideoPlaying()) video.current.pause();
+      if (isVisible && !isVideoPlaying()){
+        video.current.play();
+        //animate();
+      } 
+    }
+    
+  }, [isVisible]);
+
   function animate() {
     requestAnimationFrame(animate);
-    render();
+    if(!isVisible) render();
   }
 
   function isVideoPlaying() { 
@@ -82,25 +99,12 @@ export default function Main() {
         height="500"
       ></canvas>
       <div id="root" className={styles.rootContainer}>
-        <Header width={state.screen.width} height={state.screen.height}/>
+        <Header ref={target} width={state.screen.width} height={state.screen.height}/>
         <Work />
       </div>
     </div>
   );
 }
-
-// function getWindowSize() {
-//   let width = window.innerWidth;
-//   let height = window.innerHeight;
-
-//   if (width >= MAX_SCREEN_WIDTH) width = MAX_SCREEN_WIDTH;
-//   if (height >= MAX_SCREEN_HEIGHT) height = MAX_SCREEN_HEIGHT;
-
-//   return {
-//     width,
-//     height,
-//   };
-// }
 
 function getWindowSize() {
   const width = window.innerWidth;
@@ -138,6 +142,7 @@ function initThreeVideoEffect(asciiActive = true) {
     effect.setSize(width, height);
     effect.domElement.style.color = "#6a6c77";
     effect.domElement.style.backgroundColor = "#1f212a";
+    effect.domElement.id = 'asciivideo'
     // Special case: append effect.domElement, instead of renderer.domElement.
     // AsciiEffect creates a custom domElement (a div container) where the ASCII elements are placed.
     document.body.appendChild(effect.domElement);

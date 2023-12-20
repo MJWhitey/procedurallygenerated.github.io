@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styles from "../components/header.module.css";
 import root_styles from "../components/index.module.css";
 
@@ -7,19 +7,19 @@ interface HeaderProps {
   height: number;
 }
 
-export default function Header({ width, height }: HeaderProps) {
+const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
   return (
-    <div id="header" className={styles.headerContainer}>
+    <div ref={ref} id="header" className={styles.headerContainer}>
       <div
         className={root_styles.contentContainer}
         style={{
-          width: width,
-          height: height - 30,
+          width: props.width,
+          height: props.height - 30,
         }}
       >
         <div style={{ flex: 1 }}>
           <h2 className={styles.header}>
-            I build technology
+            Building technology
             <br /> products that deliver
             <br />
             <strong>meaningful</strong> outcomes
@@ -44,5 +44,9 @@ export default function Header({ width, height }: HeaderProps) {
         </div>
       </div>
     </div>
-  );
-}
+  )
+});
+
+Header.displayName = 'Header';
+
+export default Header;
