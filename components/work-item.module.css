@@ -36,7 +36,7 @@
 }
 
 .workItem h2 {
-  font-family: "BarlowBold";
+  font-family: "BarlowSemiCondensed-Bold";
   font-size: 24px;
   color: #e4e4e4;
   text-shadow: 2px 2px #000;
@@ -56,7 +56,7 @@
 }
 
 .workItemOverlay h2 {
-  font-family: "BarlowBold";
+  font-family: "BarlowSemiCondensed-Bold";
   font-size: 24px;
   color: #1f212a;
   text-shadow: none;

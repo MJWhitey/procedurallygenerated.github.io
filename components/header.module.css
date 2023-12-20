@@ -25,7 +25,7 @@
 }
 
 .menuContainer button {
-  font-family: "BarlowBold";
+  font-family: "BarlowSemiCondensed-Bold";
   font-size: 30px;
   color: #111115;
   background-color: #dddee6;
@@ -54,7 +54,7 @@
 }
 
 .header {
-  font-family: "BarlowBoldItalic";
+  font-family: "BarlowSemiCondensed-BoldItalic";
   font-size: 48px;
   color: #e4e4e4;
   text-shadow: 2px 2px #000;
@@ -74,7 +74,7 @@
 }
 
 h2.headerTitle {
-  font-family: "BarlowBold";
+  font-family: "BarlowSemiCondensed-Bold";
   font-size: 60px;
   color: #e4e4e4;
   text-shadow: 2px 2px #000;
@@ -88,7 +88,7 @@ h2.headerTitle {
 }
 
 h3.headerTitle {
-  font-family: "BarlowSemiBold";
+  font-family: "BarlowSemiCondensed-SemiBold";
   font-size: 26px;
   color: #e4e4e4;
   text-shadow: 2px 2px #000;

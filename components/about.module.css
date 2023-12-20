@@ -1,0 +1,97 @@
+.componentContainer {
+  max-width: 956px;
+  margin: auto;
+}
+
+.aboutContainer {
+  background-color: #1f212a;
+  border-radius: 84px 84px 0 0;
+  padding: 80px 0;
+}
+
+.aboutContainer h1 {
+  color: #e4e4e4;
+  text-shadow: 2px 2px #000;
+  font-family: "BarlowSemiCondensed-BoldItalic";
+  font-size: 60px;
+  margin: 48px 0;
+}
+
+.aboutContainer h2 {
+  color: #e4e4e4;
+  text-shadow: 2px 2px #000;
+  font-family: "BarlowSemiCondensed-BoldItalic";
+  font-size: 48px;
+  margin-top: 0;
+}
+
+.aboutContainer strong {
+  color: #96e2a4;
+}
+
+.aboutContainer p {
+  font-family: "BarlowSemiCondensed-Regular";
+  font-size: 20px;
+  line-height: 28px;
+  color: #e4e4e4;
+  text-align: left;
+}
+
+.aboutContent {
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.aboutText {
+  margin-left: 90px;
+}
+
+.aboutContainer hr {
+  margin-bottom: 82px;
+}
+
+img.profilePic {
+  width: 282px;
+  height: 282px;
+}
+
+@media screen and (max-width: 768px) {
+    .aboutContent {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .aboutContainer {
+        border-radius: 42px 42px 0 0;
+        padding: 30px;
+    }
+
+    .aboutContainer h1 {
+        font-size: 30px;
+        margin: 24px 0;
+    }
+
+    .aboutContainer h2 {
+        font-size: 30px;
+        margin: 40px 0;
+    }
+
+    .aboutContainer hr {
+        margin: 0 0 35px 0;
+    }
+
+    .aboutContainer p {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .aboutText {
+        text-align: center;
+        margin: 0 30px;
+    }
+
+    .aboutText p {
+        text-align: center;
+    }
+}

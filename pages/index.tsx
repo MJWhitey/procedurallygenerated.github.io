@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import styles from "../components/index.module.css";
 import Work from "../components/work";
 import Header from "../components/header";
+import About from "../components/about";
 
 let camera, scene, renderer, effect;
 let plane;
@@ -101,6 +102,9 @@ export default function Main() {
       <div id="root" className={styles.rootContainer}>
         <Header ref={target} width={state.screen.width} height={state.screen.height}/>
         <Work />
+        <About />
+        {/* <Skills />
+        <Contact /> */}
       </div>
     </div>
   );

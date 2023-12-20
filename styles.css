@@ -9,22 +9,22 @@
   }
 
 @font-face {
-  font-family: BarlowSemiBold;
+  font-family: BarlowSemiCondensed-SemiBold;
   src: url(/fonts/BarlowSemiCondensed-SemiBold.ttf);
 }
 
 @font-face {
-  font-family: BarlowSemiBoldItalic;
+  font-family: BarlowSemiCondensed-SemiBoldItalic;
   src: url(/fonts/BarlowSemiCondensed-SemiBoldItalic.ttf);
 }
 
 @font-face {
-  font-family: BarlowBold;
+  font-family: BarlowSemiCondensed-Bold;
   src: url(/fonts/BarlowSemiCondensed-Bold.ttf);
 }
 
 @font-face {
-  font-family: BarlowBoldItalic;
+  font-family: BarlowSemiCondensed-BoldItalic;
   src: url(/fonts/BarlowSemiCondensed-BoldItalic.ttf);
 }
 
