@@ -1,0 +1,117 @@
+.skillsContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.skillsContainerSml {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .skillsContainer {
+    display: none;
+  }
+  .skillsContainerSml {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+}
+
+.skillsColumn {
+  flex: 1;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.skillsColumn h1 {
+  font-family: "BarlowSemiCondensed-Bold";
+  font-size: 24px;
+  color: #1f212a;
+  text-shadow: none;
+  text-align: center;
+  pointer-events: none;
+  margin-bottom: 0;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .skillsColumn h1 {
+    font-size: 30px;
+    margin: 0 0 20px 0;
+  }
+}
+
+.skillsColumn li {
+  text-decoration: none;
+  text-indent: 0;
+  font-family: "BarlowSemiCondensed-SemiBold";
+  font-size: 18px;
+  padding: 7.5px 0;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .skillsColumn li {
+      font-size: 14px;
+    }
+  }
+
+.skillsColumn ul {
+  flex: 1;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cellSpacer {
+  flex: 1;
+}
+
+.cellWrapper {
+  height: 290px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .cellWrapper {
+      height: auto;
+      padding: 40px 0;
+    }
+  }
+
+.skillsPrimary {
+  composes: skillsColumn;
+  background-color: #96e2a4;
+}
+
+.skillsPrimary h1 {
+  color: #1f212a;
+}
+
+.skillsPrimary li {
+  color: #1f212a;
+}
+
+.skillsSecondary {
+  composes: skillsColumn;
+  background-color: #3c3f50;
+}
+
+.skillsTertiary {
+  composes: skillsColumn;
+  background-color: #2e303d;
+}
+
+.shadedCellWrapper {
+  composes: cellWrapper;
+  background-color: #00000020;
+}
+
+.shaded {
+  background-color: #00000020;
+}

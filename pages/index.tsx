@@ -8,6 +8,7 @@ import styles from "../components/index.module.css";
 import Work from "../components/work";
 import Header from "../components/header";
 import About from "../components/about";
+import Skills from "../components/skills";
 
 let camera, scene, renderer, effect;
 let plane;
@@ -103,8 +104,8 @@ export default function Main() {
         <Header ref={target} width={state.screen.width} height={state.screen.height}/>
         <Work />
         <About />
-        {/* <Skills />
-        <Contact /> */}
+        <Skills />
+        {/* <Contact /> */}
       </div>
     </div>
   );
