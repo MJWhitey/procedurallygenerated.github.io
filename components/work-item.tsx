@@ -7,9 +7,10 @@ const IMAGE_ASSETS_PATH = "/images/";
 
 interface WorkItemProps {
   data;
+  onClick;
 }
 
-export default function WorkItem({ data }: WorkItemProps) {
+export default function WorkItem({ data, onClick }: WorkItemProps) {
   const overlay = useRef<HTMLDivElement>();
   const overlayTitle = useRef<HTMLHeadingElement>();
   const { contextSafe } = useGSAP({ scope: overlay });
@@ -115,6 +116,9 @@ export default function WorkItem({ data }: WorkItemProps) {
       }}
       onMouseLeave={() => {
         onItemOff();
+      }}
+      onMouseDown={() => {
+        if(onClick) onClick(data.title);
       }}
     >
       <div className={styles.workItemTitle}>

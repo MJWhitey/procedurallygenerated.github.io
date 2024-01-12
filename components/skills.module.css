@@ -1,18 +1,31 @@
-.skillsContainer {
+.skillsContainer{
+  composes: aboutContainer from './about.module.css';
+  padding: 0 0 140px 0;
+}
+
+.skillsComponent {
+  composes: componentContainer from './globals.module.css';
+}
+
+.skillsContent {
+  composes: aboutContent from './about.module.css';
+}
+
+.skillsContentContainer {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
 
-.skillsContainerSml {
+.skillsContentContainerSml {
   display: none;
 }
 
 @media screen and (max-width: 768px) {
-  .skillsContainer {
+  .skillsContentContainer {
     display: none;
   }
-  .skillsContainerSml {
+  .skillsContentContainerSml {
     display: flex;
     flex-direction: row;
     width: 100%;

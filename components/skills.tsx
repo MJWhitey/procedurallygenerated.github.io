@@ -1,18 +1,17 @@
 import React from "react";
 //import styles from "./skills.module.css";
-import styles from "./about.module.css";
-import skills_styles from "./skills.module.css";
+import styles from "./skills.module.css";
 import SkillsList from "./skillsList";
 
 const Skills = () => {
   return (
-    <div className={styles.aboutContainer}>
-      <div className={styles.componentContainer}>
+    <div className={styles.skillsContainer}>
+      <div className={styles.skillsComponent}>
         <h1>Technical Skills</h1>
         <hr></hr>
-        <div className={styles.aboutContent}>
-          <div className={skills_styles.skillsContainer}>
-            <div className={skills_styles.skillsPrimary}>
+        <div className={styles.skillsContent}>
+          <div className={styles.skillsContentContainer}>
+            <div className={styles.skillsPrimary}>
               <h1>Expert</h1>
               <SkillsList>
                 <ul>
@@ -40,7 +39,7 @@ const Skills = () => {
                 </ul>
               </SkillsList>
             </div>
-            <div className={skills_styles.skillsSecondary}>
+            <div className={styles.skillsSecondary}>
               <h1>Advanced</h1>
               <SkillsList>
                 <ul>
@@ -67,7 +66,7 @@ const Skills = () => {
                 </ul>
               </SkillsList>
             </div>
-            <div className={skills_styles.skillsTertiary}>
+            <div className={styles.skillsTertiary}>
               <h1>Proficient</h1>
               <SkillsList>
                 <ul>
@@ -96,8 +95,8 @@ const Skills = () => {
               </SkillsList>
             </div>
           </div>
-          <div className={skills_styles.skillsContainerSml}>
-            <div className={skills_styles.skillsSecondary}>
+          <div className={styles.skillsContentContainerSml}>
+            <div className={styles.skillsSecondary}>
               <SkillsList>
                 <h1>Expert</h1>
                 <ul>

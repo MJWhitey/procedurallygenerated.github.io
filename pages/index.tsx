@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import * as THREE from "three";
 import { AsciiEffect } from "../components/ascii";
-import { useIntersectionObserver } from 'react-intersection-observer-hook';
+import { useIntersectionObserver } from "react-intersection-observer-hook";
 
 import React, { useState } from "react";
 import styles from "../components/index.module.css";
@@ -9,6 +9,7 @@ import Work from "../components/work";
 import Header from "../components/header";
 import About from "../components/about";
 import Skills from "../components/skills";
+import Contact from "../components/contact";
 
 let camera, scene, renderer, effect;
 let plane;
@@ -31,7 +32,8 @@ export default function Main() {
   useEffect(() => {
     initThreeVideoEffect();
     animate();
-    if (video.current && video.current.muted && !isVideoPlaying()) video.current.play();
+    if (video.current && video.current.muted && !isVideoPlaying())
+      video.current.play();
     setState((prev) => ({
       ...prev,
       screen: {
@@ -43,24 +45,31 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
-    console.log(`The component is ${isVisible ? 'visible' : 'not visible'}.`);
+    console.log(`The component is ${isVisible ? "visible" : "not visible"}.`);
     if (video.current && video.current.muted) {
       if (!isVisible && isVideoPlaying()) video.current.pause();
-      if (isVisible && !isVideoPlaying()){
+      if (isVisible && !isVideoPlaying()) {
         video.current.play();
         //animate();
-      } 
+      }
     }
-    
   }, [isVisible]);
 
   function animate() {
     requestAnimationFrame(animate);
-    if(!isVisible) render();
+    if (!isVisible) render();
   }
 
-  function isVideoPlaying() { 
-    return video.current && !!(video.current.currentTime > 0 && !video.current.paused && !video.current.ended && video.current.readyState > 2);
+  function isVideoPlaying() {
+    return (
+      video.current &&
+      !!(
+        video.current.currentTime > 0 &&
+        !video.current.paused &&
+        !video.current.ended &&
+        video.current.readyState > 2
+      )
+    );
   }
 
   function onWindowResize() {
@@ -101,11 +110,15 @@ export default function Main() {
         height="500"
       ></canvas>
       <div id="root" className={styles.rootContainer}>
-        <Header ref={target} width={state.screen.width} height={state.screen.height}/>
+        <Header
+          ref={target}
+          width={state.screen.width}
+          height={state.screen.height}
+        />
         <Work />
         <About />
         <Skills />
-        {/* <Contact /> */}
+        <Contact />
       </div>
     </div>
   );
@@ -124,7 +137,7 @@ function initThreeVideoEffect(asciiActive = true) {
   camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0, 0, 0);
-  const {width, height} = getWindowSize();
+  const { width, height } = getWindowSize();
 
   const video: HTMLVideoElement = document.getElementById(
     "video"
@@ -147,7 +160,7 @@ function initThreeVideoEffect(asciiActive = true) {
     effect.setSize(width, height);
     effect.domElement.style.color = "#6a6c77";
     effect.domElement.style.backgroundColor = "#1f212a";
-    effect.domElement.id = 'asciivideo'
+    effect.domElement.id = "asciivideo";
     // Special case: append effect.domElement, instead of renderer.domElement.
     // AsciiEffect creates a custom domElement (a div container) where the ASCII elements are placed.
     document.body.appendChild(effect.domElement);

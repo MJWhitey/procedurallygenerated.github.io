@@ -1,0 +1,31 @@
+.contactContainer {
+    background-color: #dddee6;
+    padding: 30px;
+}
+
+.contactComponent {
+    composes: componentContainer from './globals.module.css'
+}
+
+.contactContainer h1 {
+    font-family: 'BarlowSemiCondensed-BoldItalic';
+    font-size: 60px;
+    margin: 48px 0;
+}
+
+.contactContainer ul {
+    list-style: none;
+    margin: 75px 0;
+    padding: 0;
+}
+
+.contactContainer li {
+    margin: 20px 0;
+}
+
+.contactContainer a {
+    font-family: 'BarlowSemiCondensed-BoldItalic';
+    font-size: 30px;
+    color: black;
+    text-decoration: underline;
+}
