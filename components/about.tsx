@@ -4,6 +4,7 @@ import styles from "./about.module.css";
 const About = () => {
   return (
     <div className={styles.aboutContainer}>
+      <a href="about" />
       <div className={styles.componentContainer}>
         <h1>About</h1>
         <hr></hr>

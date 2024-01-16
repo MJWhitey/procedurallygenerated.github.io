@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./work.module.css";
-import Data from "../constants/work.json";
+import Data from "../constants/work.js";
 
 import WorkItem from "./work-item";
 import { useGSAP } from "@gsap/react";
@@ -74,6 +74,11 @@ export default function Work() {
   }, []);
 
   const onItemClicked = (item) => {
+    const targetScroll = document.querySelector('a[href^="work"]');
+    console.log('targetScroll : ',targetScroll);
+    if(targetScroll)targetScroll.scrollIntoView({
+      behavior: 'smooth',
+    });
     setState((prev) => {
       return { ...prev, selected: item };
     });
@@ -81,6 +86,7 @@ export default function Work() {
 
   return (
     <div>
+      <a href="work" />
       <SelectedProject height={state.workHeight} selected={state.selected} />
       <div ref={workContainer} className={styles.workContainer}>
         <div className={styles.componentContainer}>

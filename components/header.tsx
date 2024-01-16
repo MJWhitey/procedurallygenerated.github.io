@@ -8,6 +8,14 @@ interface HeaderProps {
 }
 
 const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
+  function onMenuPressed(item) {
+    const targetScroll = document.querySelector('a[href^="'+item+'"]');
+    console.log('targetScroll : ',item, targetScroll);
+    if(targetScroll)targetScroll.scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
   return (
     <div ref={ref} id="header" className={styles.headerContainer}>
       <div
@@ -37,9 +45,9 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
             </h3>
           </div>
           <div className={styles.menuContainer}>
-            <button>work</button>
-            <button>about</button>
-            <button>contact</button>
+            <button onClick={() => {onMenuPressed('work')}}>work</button>
+            <button onClick={() => {onMenuPressed('about')}}>about</button>
+            <button onClick={() => {onMenuPressed('contact')}}>contact</button>
           </div>
         </div>
       </div>

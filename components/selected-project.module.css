@@ -7,5 +7,77 @@
 
 .selectedProjectComponent {
     composes: componentContainer from './globals.module.css';
+    font-family: 'BarlowSemiCondensed-Regular';
+    font-size: 20px;
+    line-height: 28px;
+    color: #e4e4e4;
+    
 }
 
+.selectedProjectComponent h1 {
+    color: #e4e4e4;
+    text-shadow: 2px 2px #000;
+    font-family: "BarlowSemiCondensed-Bold";
+    font-size: 60px;
+    margin: 48px 0;
+  }
+
+.selectedProjectComponent p {
+    text-align: center;
+}
+
+  .selectedHeader {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .selectedDetails {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .selectedHeader h1 {
+    flex: 1;
+    text-align: center;
+  }
+
+  .selectedHeader button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .selectedCarouselContainer {
+    margin-top: 40px;
+  }
+
+  .selectedBody{
+    margin-top: 60px;
+  }
+
+  .selectedCarousel {
+    height: 550px;
+    margin: auto;
+    background-color: grey;
+  }
+
+  .selectedDetails { 
+    margin-top: 40px;
+  }
+
+  .selectedDetails h2 {
+    font-size: 20px;
+    margin-top: 40px;
+  }
+
+  .selectedDetails ul {
+    margin-top: 40px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .selectedDetails li {
+    margin-top: 6px;
+  }

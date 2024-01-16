@@ -5,6 +5,7 @@ import styles from "./contact.module.css";
 const Contact = () => {
   return (
     <div className={styles.contactContainer}>
+      <a href="contact" />
       <div className={styles.contactComponent}>
         <h1>Contact</h1>
         <hr></hr>

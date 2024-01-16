@@ -118,7 +118,7 @@ export default function WorkItem({ data, onClick }: WorkItemProps) {
         onItemOff();
       }}
       onMouseDown={() => {
-        if(onClick) onClick(data.title);
+        if(onClick) onClick(data);
       }}
     >
       <div className={styles.workItemTitle}>
