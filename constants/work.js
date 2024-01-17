@@ -20,6 +20,16 @@ const Work = {
       languages: 'C#, Python, Javascript',
       frameworks: 'Unity, AltUnityTest, DJango',
       software: 'Spine, Adobe CC',
+      carousel: [
+        '/images/projects/rag/ready_attn_go_1.jpg',
+        '/images/projects/rag/ready_attn_go_2.jpg',
+        '/images/projects/rag/ready_attn_go_3.png',
+        '/images/projects/rag/ready_attn_go_4.png',
+        '/images/projects/rag/ready_attn_go_5.png',
+        '/images/projects/rag/ready_attn_go_6.jpg',
+        '/video/projects/rag/rago_elf_spine.mp4',
+        '/video/projects/rag/ready_attn_go_reel.mp4',
+      ]
     },
     {
       title: "Full Tilt VR",

@@ -84,10 +84,16 @@ export default function Work() {
     });
   };
 
+  const onSelectedProjectClosed = () => {
+    setState((prev) => {
+      return { ...prev, selected: null };
+    });
+  }
+
   return (
     <div>
       <a href="work" />
-      <SelectedProject height={state.workHeight} selected={state.selected} />
+      <SelectedProject height={state.workHeight} selected={state.selected} onClose={onSelectedProjectClosed} />
       <div ref={workContainer} className={styles.workContainer}>
         <div className={styles.componentContainer}>
           <h1>Work</h1>

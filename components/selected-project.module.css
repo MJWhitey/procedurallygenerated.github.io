@@ -50,34 +50,57 @@
   }
 
   .selectedCarouselContainer {
-    margin-top: 40px;
+    margin: 40px 0;
   }
 
   .selectedBody{
-    margin-top: 60px;
+    margin-top: 80px;
   }
 
   .selectedCarousel {
     height: 550px;
-    margin: auto;
-    background-color: grey;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .selectedCarousel img{
+    pointer-events: none;
+    height: 550px;
+    width: 100%;
   }
 
   .selectedDetails { 
-    margin-top: 40px;
+    margin-top: 0;
   }
 
   .selectedDetails h2 {
     font-size: 20px;
     margin-top: 40px;
+    font-family: 'BarlowSemiCondensed-Bold';
   }
 
   .selectedDetails ul {
-    margin-top: 40px;
+    margin-top: 0;
     list-style: none;
     padding: 0;
   }
 
   .selectedDetails li {
     margin-top: 6px;
+    font-family: 'BarlowSemiCondensed-Italic';
+    opacity: 0.5;
+  }
+
+  .selectedDots {
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    margin-top: 40px;
+    background-color: #ffffff50;
+  }
+
+  .selectedDotsSelected {
+    composes: selectedDots;
+    background-color: #ffffff;
   }

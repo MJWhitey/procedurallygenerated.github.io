@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import gsap from "gsap";
+import gsap, { TimelineLite } from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./work-item.module.css";
 
@@ -13,9 +13,11 @@ interface WorkItemProps {
 export default function WorkItem({ data, onClick }: WorkItemProps) {
   const overlay = useRef<HTMLDivElement>();
   const overlayTitle = useRef<HTMLHeadingElement>();
+  const timelineRef = useRef<TimelineLite | null>(null);
   const { contextSafe } = useGSAP({ scope: overlay });
 
   const onItemOver = contextSafe(() => {
+    if (timelineRef.current) timelineRef.current.kill();
     const tl = gsap.timeline();
     const spans =
       overlay.current && overlay.current.getElementsByTagName("span");
@@ -40,9 +42,11 @@ export default function WorkItem({ data, onClick }: WorkItemProps) {
         );
       }
     }
+    timelineRef.current = tl;
   });
 
   const onItemOff = contextSafe(() => {
+    if (timelineRef.current) timelineRef.current.kill();
     const tl = gsap.timeline();
     const spans =
       overlay.current && overlay.current.getElementsByTagName("span");
@@ -53,12 +57,10 @@ export default function WorkItem({ data, onClick }: WorkItemProps) {
     tl.set("hr", { scaleX: 0 });
     if (spans && spans?.length > 0) {
       for (const span of spans) {
-        tl.set(
-          span,
-          { alpha: 0, x: -10 }
-        );
+        tl.set(span, { alpha: 0, x: -10 });
       }
     }
+    timelineRef.current = tl;
   });
 
   function renderTechnologies(technology, k): React.ReactNode {
@@ -81,17 +83,21 @@ export default function WorkItem({ data, onClick }: WorkItemProps) {
           );
         }
       });
-    return <div className={styles.workItemSpanContainer} key={k}>{techs}</div>;
+    return (
+      <div className={styles.workItemSpanContainer} key={k}>
+        {techs}
+      </div>
+    );
   }
 
   const renderTechnology = (data) => {
     if (!data.technology) return;
     const techs: React.ReactNode[] = [];
-    let count=0;
+    let count = 0;
     //
     for (let i = 0; i < data.technology.length; i += 3) {
       // break by lines of 3
-      count ++;
+      count++;
       const slice = data.technology.slice(i, i + 3);
       techs.push(renderTechnologies(slice, count));
     }
@@ -118,7 +124,7 @@ export default function WorkItem({ data, onClick }: WorkItemProps) {
         onItemOff();
       }}
       onMouseDown={() => {
-        if(onClick) onClick(data);
+        if (onClick) onClick(data);
       }}
     >
       <div className={styles.workItemTitle}>
