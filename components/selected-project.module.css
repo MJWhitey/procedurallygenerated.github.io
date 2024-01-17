@@ -64,6 +64,10 @@
     text-align: center;
   }
 
+  .selectedCarousel video {
+    max-width: 100%;
+  }
+
   .selectedCarousel img{
     pointer-events: none;
     height: 550px;

@@ -98,6 +98,12 @@ const SelectedProject = ({
         ease: "expo.inOut",
       });
       tl.call(() => {
+        setState((prev) => {
+          return {
+            ...prev,
+            currentSlide: 0,
+          };
+        });
         if (_.isFunction(onClose)) onClose();
       });
       timelineRef.current = tl;
