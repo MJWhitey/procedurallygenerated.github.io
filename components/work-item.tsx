@@ -103,7 +103,7 @@ export default function WorkItem({ data, onClick }: WorkItemProps) {
     }
     return (
       <>
-        <hr />
+        <hr className={styles.workItemHr} />
         {techs}
       </>
     );

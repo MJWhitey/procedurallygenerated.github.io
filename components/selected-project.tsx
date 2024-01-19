@@ -1,8 +1,6 @@
 import _ from "lodash";
 import gsap, { TimelineLite } from "gsap";
 import React, {
-  ReactElement,
-  ReactNode,
   useEffect,
   useRef,
   useState,
@@ -152,6 +150,7 @@ const SelectedProject = ({
     const result: React.ReactElement[] = [];
 
     carousel.forEach((c: string) => {
+      // eslint-disable-next-line no-useless-escape
       const matchVideoExt = c.match(`^.*\.(mov|xvid|mp4)$`);
       const isVideo = matchVideoExt && matchVideoExt.length >= 1;
       console.log("c : ", c, isVideo);

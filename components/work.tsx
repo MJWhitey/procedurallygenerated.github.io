@@ -1,13 +1,10 @@
-import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./work.module.css";
 import Data from "../constants/work.js";
 import { isMobile } from "react-device-detect";
 
 import WorkItem from "./work-item";
-import { useGSAP } from "@gsap/react";
 import SelectedProject from "./selected-project";
-import { stat } from "fs";
 import { useIntersectionObserver } from "react-intersection-observer-hook";
 
 interface WorkGridProps {
@@ -132,7 +129,7 @@ export default function Work() {
       >
         <div ref={workContainer} className={styles.workContainer}>
           <div className={styles.componentContainer}>
-            <h1>Work</h1>
+            <h1 className={styles.workContainerHr}>Work</h1>
             <hr></hr>
             <div>
               <p>

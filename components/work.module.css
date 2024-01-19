@@ -35,7 +35,7 @@
     }
 }
 
-.workContainer hr {
+.workContainerHr {
     color: black;
     width: 100%;
     margin: 0 0 60px 0;
@@ -75,7 +75,7 @@
         margin: 24px 0;
     }
 
-    .workContainer hr {
+    .workContainerHr {
         margin: 0 0 35px 0;
     }
 
