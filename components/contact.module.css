@@ -1,31 +1,51 @@
 .contactContainer {
-    background-color: #dddee6;
-    padding: 30px;
+  background-color: #dddee6;
+  padding: 30px;
 }
 
 .contactComponent {
-    composes: componentContainer from './globals.module.css'
+  composes: componentContainer from "./globals.module.css";
 }
 
 .contactContainer h1 {
-    font-family: 'BarlowSemiCondensed-BoldItalic';
-    font-size: 60px;
-    margin: 48px 0;
+  font-family: "BarlowSemiCondensed-BoldItalic";
+  font-size: 60px;
+  margin: 48px 0;
 }
 
 .contactContainer ul {
-    list-style: none;
-    margin: 75px 0;
-    padding: 0;
+  list-style: none;
+  margin: 75px 0;
+  padding: 0;
 }
 
 .contactContainer li {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 .contactContainer a {
-    font-family: 'BarlowSemiCondensed-BoldItalic';
+  font-family: "BarlowSemiCondensed-BoldItalic";
+  font-size: 30px;
+  color: black;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .contactContainer h1 {
     font-size: 30px;
-    color: black;
-    text-decoration: underline;
+    margin: 24px 0;
+  }
+
+  .contactContainer ul {
+    list-style: none;
+    margin: 40px 0;
+  }
+  
+  .contactContainer li {
+    margin: 20px 0;
+  }
+
+  .contactContainer a {
+    font-size: 16px;
+  }
 }

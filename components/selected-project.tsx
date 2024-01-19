@@ -17,14 +17,17 @@ interface SelectedProjectProps {
   height?: number;
   selected?;
   onClose?;
+  onChange?;
 }
 
 const SelectedProject = ({
   height = 0,
   selected = null,
   onClose = {},
+  onChange = null,
 }: SelectedProjectProps) => {
   const selectedItemContainer = useRef<HTMLDivElement>(null);
+  const selectedItemComponent = useRef<HTMLDivElement>(null);
   const slickRef = useRef<Slider>(null);
   const timelineRef = useRef<TimelineLite | null>(null);
   const [state, setState] = useState({
@@ -64,10 +67,24 @@ const SelectedProject = ({
 
   useEffect(() => {
     //
+    if (_.isFunction(onChange)) {
+      notifyChange();
+    }
+
     if (selected !== null && selected !== "none") {
       animateIn();
     }
   }, [selected]);
+
+  const notifyChange = async () => {
+    await new Promise((res) => setTimeout(res, 800));
+    if (
+      selectedItemComponent.current &&
+      selectedItemComponent.current?.offsetHeight > 0
+    ) {
+      onChange(selectedItemComponent.current?.offsetHeight + 60); // [MW] This doesnt include padding for some reason?
+    }
+  };
 
   const animateIn = () => {
     contextSafe(() => {
@@ -180,14 +197,18 @@ const SelectedProject = ({
           //marginTop: state.workHeight,
         }}
       >
-        <div className={styles.selectedProjectComponent}>
+        <div
+          ref={selectedItemComponent}
+          className={styles.selectedProjectComponent}
+        >
           {selected && (
             <>
               <div className={styles.selectedHeader}>
-                <button onClick={onProjectClose}>
+                <button style={{ flex: 1 }} onClick={onProjectClose}>
                   <img src="/images/close.png"></img>
                 </button>
-                <h1>{selected.title}</h1>
+                <h1 style={{ flex: 8 }}>{selected.title}</h1>
+                <div style={{ flex: 1 }}></div>
               </div>
               {selected.carousel && selected.carousel.length >= 1 && (
                 <div

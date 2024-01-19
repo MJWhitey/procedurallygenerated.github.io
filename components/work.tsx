@@ -2,10 +2,13 @@ import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./work.module.css";
 import Data from "../constants/work.js";
+import { isMobile } from "react-device-detect";
 
 import WorkItem from "./work-item";
 import { useGSAP } from "@gsap/react";
 import SelectedProject from "./selected-project";
+import { stat } from "fs";
+import { useIntersectionObserver } from "react-intersection-observer-hook";
 
 interface WorkGridProps {
   onItemClicked;
@@ -60,25 +63,37 @@ function WorkGrid({ onItemClicked }: WorkGridProps) {
 }
 
 export default function Work() {
+  const originalHeight = useRef<number>(0);
   const workContainer = useRef<HTMLDivElement>(null);
+  const workParentContainer = useRef<HTMLDivElement>(null);
+  //
+  const [anchor, { entry }] = useIntersectionObserver();
+  const isAnchorVisible = entry && entry.isIntersecting;
+
   const [state, setState] = useState({
     selected: null,
     workHeight: 0,
   });
 
   useEffect(() => {
-    const containerHeight = workContainer?.current?.offsetHeight || 0;
+    originalHeight.current = workContainer?.current?.offsetHeight || 0;
     setState((prev) => {
-      return { ...prev, workHeight: containerHeight };
+      return { ...prev, workHeight: originalHeight.current };
     });
   }, []);
 
-  const onItemClicked = (item) => {
-    const targetScroll = document.querySelector('a[href^="work"]');
-    console.log('targetScroll : ',targetScroll);
-    if(targetScroll)targetScroll.scrollIntoView({
-      behavior: 'smooth',
-    });
+  const onItemClicked = async (item) => {
+    if (isMobile) await new Promise((res) => setTimeout(res, 1200));
+    if (!isAnchorVisible) {
+      const targetScroll = document.querySelector('a[href^="work"]');
+      console.log("targetScroll : ", targetScroll);
+      if (targetScroll)
+        targetScroll.scrollIntoView({
+          behavior: "smooth",
+        });
+      await new Promise((res) => setTimeout(res, 500));
+    }
+
     setState((prev) => {
       return { ...prev, selected: item };
     });
@@ -86,29 +101,51 @@ export default function Work() {
 
   const onSelectedProjectClosed = () => {
     setState((prev) => {
-      return { ...prev, selected: null };
+      return { ...prev, selected: null, workHeight: originalHeight.current };
     });
-  }
+  };
+
+  const onSelectedProjectChanged = async (height) => {
+    console.log("onSelectedProjectChanged - height : ", height);
+    if (isMobile) {
+      setState((prev) => {
+        return { ...prev, workHeight: height };
+      });
+    }
+    
+  };
 
   return (
-    <div>
-      <a href="work" />
-      <SelectedProject height={state.workHeight} selected={state.selected} onClose={onSelectedProjectClosed} />
-      <div ref={workContainer} className={styles.workContainer}>
-        <div className={styles.componentContainer}>
-          <h1>Work</h1>
-          <hr></hr>
-          <div>
-            <p>
-              {`Below you’ll find a few personal milestone projects I've been a part
+    <div ref={workParentContainer} style={{ overflow: "hidden" }}>
+      <a ref={anchor} href="work" />
+      <SelectedProject
+        height={state.workHeight}
+        selected={state.selected}
+        onClose={onSelectedProjectClosed}
+        onChange={onSelectedProjectChanged}
+      />
+      <div
+        style={{
+          height: state.workHeight > 0 ? state.workHeight : "auto",
+          overflow: "hidden",
+        }}
+      >
+        <div ref={workContainer} className={styles.workContainer}>
+          <div className={styles.componentContainer}>
+            <h1>Work</h1>
+            <hr></hr>
+            <div>
+              <p>
+                {`Below you’ll find a few personal milestone projects I've been a part
             of, showcasing some of the technologies and clients I've worked with
             and the problems that were solved. This is a short list of examples,
             so if you'd like more information feel free to get in touch at the
             links below. All imagery and branding is the property of their
             respective owners.`}
-            </p>
+              </p>
+            </div>
+            <WorkGrid onItemClicked={onItemClicked} />
           </div>
-          <WorkGrid onItemClicked={onItemClicked} />
         </div>
       </div>
     </div>

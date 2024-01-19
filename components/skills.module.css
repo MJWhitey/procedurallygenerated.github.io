@@ -1,6 +1,6 @@
 .skillsContainer{
   composes: aboutContainer from './about.module.css';
-  padding: 0 0 140px 0;
+  padding-bottom: 140px;
 }
 
 .skillsComponent {
@@ -22,6 +22,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .skillsContainer{
+    padding-bottom: 40px;
+  }
   .skillsContentContainer {
     display: none;
   }
