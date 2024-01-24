@@ -14,7 +14,7 @@ class AsciiEffect {
 
 		// Some ASCII settings
 
-		const fResolution = options[ 'resolution' ] || 0.12; // Higher for more details
+		const fResolution = options[ 'resolution' ] || 0.10; // Higher for more details
 		const iScale = options[ 'scale' ] || 1;
 		const bColor = options[ 'color' ] || false; // nice but slows down rendering!
 		const bAlpha = options[ 'alpha' ] || false; // Transparency

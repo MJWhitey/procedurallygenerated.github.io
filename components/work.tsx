@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, forwardRef } from "react";
 import styles from "./work.module.css";
 import Data from "../constants/work.js";
 import { isMobile } from "react-device-detect";
@@ -59,10 +59,12 @@ function WorkGrid({ onItemClicked }: WorkGridProps) {
   return <div className={styles.gridContainer}>{rows}</div>;
 }
 
-export default function Work() {
+interface WorkProps {}
+
+const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
   const originalHeight = useRef<number>(0);
   const workContainer = useRef<HTMLDivElement>(null);
-  const workParentContainer = useRef<HTMLDivElement>(null);
+  //const workParentContainer = useRef<HTMLDivElement>(null);
   //
   const [anchor, { entry }] = useIntersectionObserver();
   const isAnchorVisible = entry && entry.isIntersecting;
@@ -72,11 +74,16 @@ export default function Work() {
     workHeight: 0,
   });
 
-  useEffect(() => {
+  const onWindowResize = () => {
     originalHeight.current = workContainer?.current?.offsetHeight || 0;
     setState((prev) => {
       return { ...prev, workHeight: originalHeight.current };
     });
+  }
+
+  useEffect(() => {
+    onWindowResize();
+    window.addEventListener("resize", onWindowResize);
   }, []);
 
   const onItemClicked = async (item) => {
@@ -104,16 +111,15 @@ export default function Work() {
 
   const onSelectedProjectChanged = async (height) => {
     console.log("onSelectedProjectChanged - height : ", height);
-    if (isMobile) {
+    //if (isMobile) {
       setState((prev) => {
-        return { ...prev, workHeight: height };
+        return { ...prev, workHeight: isMobile ? height : height + 60 };
       });
-    }
-    
+    //}
   };
 
   return (
-    <div ref={workParentContainer} style={{ overflow: "hidden" }}>
+    <div  style={{ overflow: "hidden" }}>
       <a ref={anchor} href="work" />
       <SelectedProject
         height={state.workHeight}
@@ -131,6 +137,7 @@ export default function Work() {
           <div className={styles.componentContainer}>
             <h1 className={styles.workContainerHr}>Work</h1>
             <hr></hr>
+            <div ref={ref}></div>
             <div>
               <p>
                 {`Below you’ll find a few personal milestone projects I've been a part
@@ -147,4 +154,8 @@ export default function Work() {
       </div>
     </div>
   );
-}
+});
+
+Work.displayName = 'Work';
+
+export default Work;

@@ -153,7 +153,7 @@ const SelectedProject = ({
       // eslint-disable-next-line no-useless-escape
       const matchVideoExt = c.match(`^.*\.(mov|xvid|mp4)$`);
       const isVideo = matchVideoExt && matchVideoExt.length >= 1;
-      console.log("c : ", c, isVideo);
+      //console.log("c : ", c, isVideo);
       if (isVideo) {
         result.push(
           <div className={styles.selectedCarousel}>

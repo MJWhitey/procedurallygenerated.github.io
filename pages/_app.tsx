@@ -2,16 +2,7 @@
 import type { AppProps } from "next/app";
 import "../styles.css";
 
-import { Viewport } from "next";
 import Head from "next/head";
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  // Also supported by less commonly used
-  // interactiveWidget: 'resizes-visual',
-};
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

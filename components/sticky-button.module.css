@@ -1,0 +1,51 @@
+.stickyContainer {
+  z-index: 1;
+  position: fixed;
+  bottom: 80px;
+  right: 80px;
+  width: 60px;
+  height: 60px;
+  background-color: #3c3f50;
+  border-radius: 10px;
+  padding: 10px 12px 12px 10px;
+  box-shadow: 0 3px #00000080;
+}
+
+.innerStickyContainer {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #dddee680;
+    height: 100%;
+    width: 100%;
+}
+
+.stickyButton {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stickSvg {
+   
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .stickSvg {
+        width: 18px;
+        height: 18px;
+    }
+    
+
+    .stickyContainer {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        padding: 6px 8px 8px 6px;
+      }
+}

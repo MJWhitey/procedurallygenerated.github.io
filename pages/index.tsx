@@ -10,6 +10,7 @@ import Header from "../components/header";
 import About from "../components/about";
 import Skills from "../components/skills";
 import Contact from "../components/contact";
+import StickyButton from "../components/sticky-button";
 
 let camera, scene, renderer, effect;
 let plane;
@@ -19,14 +20,17 @@ export default function Main() {
   const video = React.useRef<HTMLVideoElement>();
   const ctx = React.useRef<HTMLCanvasElement>();
   //
-  const [target, { entry }] = useIntersectionObserver();
-  const isVisible = entry && entry.isIntersecting;
+  const [observedHeader, { entry: headerEntry }] = useIntersectionObserver();
+  const isHeaderVisible = headerEntry && headerEntry.isIntersecting;
+  const [observedWork, { entry: workEntry }] = useIntersectionObserver();
+  const isWorkVisible = workEntry && workEntry.isIntersecting;
   //
   const [state, setState] = useState({
     screen: {
       width: 956,
       height: 400,
     },
+    showScrollToTopBtn: false,
   });
 
   useEffect(() => {
@@ -45,19 +49,30 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
-    console.log(`The component is ${isVisible ? "visible" : "not visible"}.`);
+    console.log("VISIBILITY : ", isHeaderVisible, isWorkVisible);
     if (video.current && video.current.muted) {
-      if (!isVisible && isVideoPlaying()) video.current.pause();
-      if (isVisible && !isVideoPlaying()) {
+      if (!isHeaderVisible && isVideoPlaying()) video.current.pause();
+      if (isHeaderVisible && !isVideoPlaying()) {
         video.current.play();
         //animate();
       }
     }
-  }, [isVisible]);
+    if( !isWorkVisible && !isHeaderVisible) {
+      setState((prev) => ({ ...prev, showScrollToTopBtn: true}))
+    }
+
+    if((isWorkVisible || isHeaderVisible) && state.showScrollToTopBtn) {
+      setState((prev) => ({ ...prev, showScrollToTopBtn: false}))
+    }
+  }, [isHeaderVisible, isWorkVisible]);
+
+  // useEffect(() => {
+  //   console.log(`The WORK component is ${isHeaderVisible ? "visible" : "not visible"}.`);
+  // }, [isWorkVisible]);
 
   function animate() {
     requestAnimationFrame(animate);
-    if (!isVisible) render();
+    if (!isHeaderVisible) render();
   }
 
   function isVideoPlaying() {
@@ -101,7 +116,10 @@ export default function Main() {
         style={{ width: "500px", height: "500px" }}
         className={styles.hidden}
       >
-        <source src="/video/doom_zoom.mp4" />
+        {/* <source src="/video/doom_zoom.mp4" /> */}
+        {/* <source src="/video/computers_1.mov" /> */}
+        {/* <source src="/video/pick_me_1.mov" /> */}
+        <source src="/video/graphics_1.mov" />
       </video>
       <canvas
         className={styles.hidden}
@@ -111,14 +129,15 @@ export default function Main() {
       ></canvas>
       <div id="root" className={styles.rootContainer}>
         <Header
-          ref={target}
+          ref={observedHeader}
           width={state.screen.width}
           height={state.screen.height}
         />
-        <Work />
+        <Work ref={observedWork} />
         <About />
         <Skills />
         <Contact />
+        { state.showScrollToTopBtn && <StickyButton />}
       </div>
     </div>
   );
@@ -163,7 +182,7 @@ function initThreeVideoEffect(asciiActive = true) {
     effect.domElement.id = "asciivideo";
     // Special case: append effect.domElement, instead of renderer.domElement.
     // AsciiEffect creates a custom domElement (a div container) where the ASCII elements are placed.
-    document.body.appendChild(effect.domElement);
+    if(document.getElementById("asciivideo") == null) document.body.appendChild(effect.domElement);
   } else {
     document.body.appendChild(renderer.domElement);
   }
