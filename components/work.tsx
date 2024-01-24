@@ -79,11 +79,13 @@ const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
     setState((prev) => {
       return { ...prev, workHeight: originalHeight.current };
     });
-  }
+  };
 
   useEffect(() => {
     onWindowResize();
-    window.addEventListener("resize", onWindowResize);
+    if (!isMobile) {
+      window.addEventListener("resize", onWindowResize);
+    }
   }, []);
 
   const onItemClicked = async (item) => {
@@ -112,14 +114,14 @@ const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
   const onSelectedProjectChanged = async (height) => {
     console.log("onSelectedProjectChanged - height : ", height);
     //if (isMobile) {
-      setState((prev) => {
-        return { ...prev, workHeight: isMobile ? height : height + 60 };
-      });
+    setState((prev) => {
+      return { ...prev, workHeight: isMobile ? height : height + 60 };
+    });
     //}
   };
 
   return (
-    <div  style={{ overflow: "hidden" }}>
+    <div style={{ overflow: "hidden" }}>
       <a ref={anchor} href="work" />
       <SelectedProject
         height={state.workHeight}
@@ -156,6 +158,6 @@ const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
   );
 });
 
-Work.displayName = 'Work';
+Work.displayName = "Work";
 
 export default Work;

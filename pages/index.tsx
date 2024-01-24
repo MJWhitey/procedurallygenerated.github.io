@@ -11,6 +11,7 @@ import About from "../components/about";
 import Skills from "../components/skills";
 import Contact from "../components/contact";
 import StickyButton from "../components/sticky-button";
+import { isMobile } from "react-device-detect";
 
 let camera, scene, renderer, effect;
 let plane;
@@ -34,7 +35,7 @@ export default function Main() {
   });
 
   useEffect(() => {
-    initThreeVideoEffect();
+    initThreeVideoEffect(true, isMobile);
     animate();
     if (video.current && video.current.muted && !isVideoPlaying())
       video.current.play();
@@ -119,7 +120,8 @@ export default function Main() {
         {/* <source src="/video/doom_zoom.mp4" /> */}
         {/* <source src="/video/computers_1.mov" /> */}
         {/* <source src="/video/pick_me_1.mov" /> */}
-        <source src="/video/graphics_1.mov" />
+        {/* <source src="/video/graphics_1.mov" /> */}
+        <source src="/video/supercut_1.mov" />
       </video>
       <canvas
         className={styles.hidden}
@@ -152,7 +154,7 @@ function getWindowSize() {
   };
 }
 
-function initThreeVideoEffect(asciiActive = true) {
+function initThreeVideoEffect(asciiActive = true, mobileCfg = false) {
   camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0, 0, 0);
@@ -175,9 +177,9 @@ function initThreeVideoEffect(asciiActive = true) {
   renderer.setSize(width, height);
 
   if (asciiActive) {
-    effect = new AsciiEffect(renderer, " .:-+*=%@#", { invert: false });
+    effect = new AsciiEffect(renderer, " .:-+*=%@#", { invert: false, resolution: mobileCfg ? 0.16 : 0.1 });
     effect.setSize(width, height);
-    effect.domElement.style.color = "#6a6c77";
+    effect.domElement.style.color = "#585a66";
     effect.domElement.style.backgroundColor = "#1f212a";
     effect.domElement.id = "asciivideo";
     // Special case: append effect.domElement, instead of renderer.domElement.

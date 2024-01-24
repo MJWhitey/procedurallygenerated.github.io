@@ -9,6 +9,7 @@
   border-radius: 10px;
   padding: 10px 12px 12px 10px;
   box-shadow: 0 3px #00000080;
+  cursor: pointer;
 }
 
 .innerStickyContainer {
@@ -42,8 +43,8 @@
     
 
     .stickyContainer {
-        bottom: 20px;
-        right: 20px;
+        bottom: 5%;
+        right: 10%;
         width: 40px;
         height: 40px;
         padding: 6px 8px 8px 6px;
