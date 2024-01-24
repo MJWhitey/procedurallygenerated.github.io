@@ -121,7 +121,7 @@ export default function Main() {
         {/* <source src="/video/computers_1.mov" /> */}
         {/* <source src="/video/pick_me_1.mov" /> */}
         {/* <source src="/video/graphics_1.mov" /> */}
-        <source src="/video/supercut_1.mov" />
+        <source src="/video/supercut_1.mp4" />
       </video>
       <canvas
         className={styles.hidden}
@@ -139,7 +139,7 @@ export default function Main() {
         <About />
         <Skills />
         <Contact />
-        { state.showScrollToTopBtn && <StickyButton />}
+        <StickyButton visible={state.showScrollToTopBtn} />
       </div>
     </div>
   );

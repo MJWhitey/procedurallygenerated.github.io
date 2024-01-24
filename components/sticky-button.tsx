@@ -1,16 +1,71 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./sticky-button.module.css";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
-const StickyButton = () => {
-    function onPress(): void {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        })
+interface StickButtonProps {
+  visible: boolean
+}
+
+const StickyButton = ({visible = false}: StickButtonProps) => {
+  const stickyRef = useRef<HTMLDivElement>(null);
+  const { contextSafe } = useGSAP({ scope: stickyRef });
+  const timelineRef = useRef<TimelineLite | null>(null);
+
+  const [state, setState] = useState({
+    visible: false,
+  });
+
+  useEffect(() => {
+    if (state.visible != visible) {
+      if (visible) {
+        animateIn();
+      } else {
+        animateOut();
+      }
     }
+  }, [visible]);
+
+  const animateIn = contextSafe(() => {
+    if (timelineRef.current) timelineRef.current.kill();
+    const tl = gsap.timeline();
+    tl.call(() => {
+      setState((prev) => ({ ...prev, visible }));
+    })
+    tl.fromTo(
+      stickyRef.current as gsap.TweenTarget,
+      { y: 20, alpha: 0 },
+      { y: 0, alpha: 1, duration: 0.8, ease: 'elastic.out' }
+    );
+  });
+
+  const animateOut = contextSafe(() => {
+    if (timelineRef.current) timelineRef.current.kill();
+    const tl = gsap.timeline();
+    tl.fromTo(
+      stickyRef.current as gsap.TweenTarget,
+      { y: 0, alpha: 1 },
+      { y: 20, alpha: 0, duration: 0.4, ease: 'expo.in' }
+    );
+    tl.call(() => {
+      setState((prev) => ({ ...prev, visible }));
+    })
+  });
+
+  const onPress = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <div className={styles.stickyContainer} onMouseDown={onPress}>
+    <div
+      ref={stickyRef}
+      className={styles.stickyContainer}
+      style={state.visible ? {} : {display: 'none'}}
+      onMouseDown={onPress}
+    >
       <div className={styles.innerStickyContainer}>
         <div className={styles.stickyButton}>
           <svg

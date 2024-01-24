@@ -109,10 +109,11 @@ const Skills = () => {
               <SkillsList shaded>
                 <h1>Advanced</h1>
                 <ul>
-                  <li>Xamarin</li>
-                  <li>NodeJs (Express) </li>
-                  <li>Spine (2d Animation)</li>
-                  <li>Unity Engine</li>
+                  <li>PHP, Python</li>
+                  <li>React, React Native</li>
+                  <li>AWS Lambda / Cognito / S3</li>
+                  <li>XCode, Android Studio</li>
+                  <li>Docker / Containerization</li>
                 </ul>
               </SkillsList>
               <SkillsList>

@@ -23,7 +23,7 @@
 
 @media screen and (max-width: 768px) {
   .skillsContainer{
-    padding-bottom: 40px;
+    padding-bottom: 80px;
   }
   .skillsContentContainer {
     display: none;
