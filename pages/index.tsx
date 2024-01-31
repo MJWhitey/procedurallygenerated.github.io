@@ -113,10 +113,6 @@ export default function Main() {
         style={{ width: "500px", height: "500px" }}
         className={styles.hidden}
       >
-        {/* <source src="/video/doom_zoom.mp4" /> */}
-        {/* <source src="/video/computers_1.mov" /> */}
-        {/* <source src="/video/pick_me_1.mov" /> */}
-        {/* <source src="/video/graphics_1.mov" /> */}
         <source src={`${prefix}/video/supercut_1.mp4`} />
       </video>
       <canvas
