@@ -33,6 +33,7 @@ export default function Main() {
       height: 400,
     },
     showScrollToTopBtn: false,
+    showSelectedProject: true,
   });
 
   useEffect(() => {
@@ -58,12 +59,12 @@ export default function Main() {
         video.current.play();
       }
     }
-    if( isWorkVisible === false && isHeaderVisible === false) {
-      setState((prev) => ({ ...prev, showScrollToTopBtn: true}))
+    if (isWorkVisible === false && isHeaderVisible === false) {
+      setState((prev) => ({ ...prev, showScrollToTopBtn: true }));
     }
 
-    if((isWorkVisible || isHeaderVisible) && state.showScrollToTopBtn) {
-      setState((prev) => ({ ...prev, showScrollToTopBtn: false}))
+    if ((isWorkVisible || isHeaderVisible) && state.showScrollToTopBtn) {
+      setState((prev) => ({ ...prev, showScrollToTopBtn: false }));
     }
   }, [isHeaderVisible, isWorkVisible]);
 
@@ -99,6 +100,28 @@ export default function Main() {
     }));
   }
 
+  const onStickyButtonPress = () => {
+    const targetScroll = document.querySelector('a[href^="work"]');
+    
+    if (targetScroll) {
+      targetScroll.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+    console.log("onStickyButtonPress : ", state.showSelectedProject);
+    setState((prev) => ({ ...prev, showSelectedProject: false }));
+  };
+
+  const onWorkClosed = () => {
+    console.log("onWorkClosed");
+    setState((prev) => ({ ...prev, showSelectedProject: true }));
+  };
+
+  const onWorkChanged = () => {
+    console.log("onWorkChanged");
+    setState((prev) => ({ ...prev, showSelectedProject: true }));
+  }
+
   return (
     <div>
       <video
@@ -127,11 +150,19 @@ export default function Main() {
           width={state.screen.width}
           height={state.screen.height}
         />
-        <Work ref={observedWork} />
+        <Work
+          ref={observedWork}
+          showSelectedProject={state.showSelectedProject}
+          onClose={onWorkClosed}
+          onChange={onWorkChanged}
+        />
         <About />
         <Skills />
         <Contact />
-        <StickyButton visible={state.showScrollToTopBtn} />
+        <StickyButton
+          visible={state.showScrollToTopBtn}
+          onPress={onStickyButtonPress}
+        />
       </div>
     </div>
   );
@@ -169,14 +200,18 @@ function initThreeVideoEffect(asciiActive = true, mobileCfg = false) {
   renderer.setSize(width, height);
 
   if (asciiActive) {
-    effect = new AsciiEffect(renderer, " .:-+*=%@#", { invert: false, resolution: mobileCfg ? 0.16 : 0.1 });
+    effect = new AsciiEffect(renderer, " .:-+*=%@#", {
+      invert: false,
+      resolution: mobileCfg ? 0.16 : 0.1,
+    });
     effect.setSize(width, height);
     effect.domElement.style.color = "#585a66";
     effect.domElement.style.backgroundColor = "#1f212a";
     effect.domElement.id = "asciivideo";
     // Special case: append effect.domElement, instead of renderer.domElement.
     // AsciiEffect creates a custom domElement (a div container) where the ASCII elements are placed.
-    if(document.getElementById("asciivideo") == null) document.body.appendChild(effect.domElement);
+    if (document.getElementById("asciivideo") == null)
+      document.body.appendChild(effect.domElement);
   } else {
     document.body.appendChild(renderer.domElement);
   }

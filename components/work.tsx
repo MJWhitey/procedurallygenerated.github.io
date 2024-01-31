@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import styles from "./work.module.css";
 import Data from "../constants/work.js";
@@ -59,7 +60,11 @@ function WorkGrid({ onItemClicked }: WorkGridProps) {
   return <div className={styles.gridContainer}>{rows}</div>;
 }
 
-interface WorkProps {}
+interface WorkProps {
+  showSelectedProject: boolean,
+  onClose?,
+  onChange?,
+}
 
 const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
   const originalHeight = useRef<number>(0);
@@ -88,6 +93,15 @@ const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log('work - selected : ', props.showSelectedProject, state.selected);
+
+    if(props.showSelectedProject === false && state.selected !== null) {
+      setState((prev) => ({...prev, selected: null}));
+      if(_.isFunction(props.onClose)) props.onClose();
+    }
+  }, [props.showSelectedProject])
+
   const onItemClicked = async (item) => {
     if (isMobile) await new Promise((res) => setTimeout(res, 1200));
     if (!isAnchorVisible) {
@@ -103,12 +117,15 @@ const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
     setState((prev) => {
       return { ...prev, selected: item };
     });
+
+    if(_.isFunction(props.onChange)) props.onChange();
   };
 
   const onSelectedProjectClosed = () => {
     setState((prev) => {
       return { ...prev, selected: null, workHeight: originalHeight.current };
     });
+    if(_.isFunction(props.onClose)) props.onClose();
   };
 
   const onSelectedProjectChanged = async (height) => {

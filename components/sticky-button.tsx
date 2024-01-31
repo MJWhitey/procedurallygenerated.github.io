@@ -4,10 +4,11 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 interface StickButtonProps {
-  visible: boolean
+  visible: boolean,
+  onPress?,
 }
 
-const StickyButton = ({visible = false}: StickButtonProps) => {
+const StickyButton = ({visible = false, onPress = null}: StickButtonProps) => {
   const stickyRef = useRef<HTMLDivElement>(null);
   const { contextSafe } = useGSAP({ scope: stickyRef });
   const timelineRef = useRef<TimelineLite | null>(null);
@@ -52,11 +53,8 @@ const StickyButton = ({visible = false}: StickButtonProps) => {
     })
   });
 
-  const onPress = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+  const onButtonPress = () => {
+    if(onPress) onPress();
   };
 
   return (
@@ -64,7 +62,7 @@ const StickyButton = ({visible = false}: StickButtonProps) => {
       ref={stickyRef}
       className={styles.stickyContainer}
       style={state.visible ? {} : {display: 'none'}}
-      onMouseDown={onPress}
+      onMouseDown={onButtonPress}
     >
       <div className={styles.innerStickyContainer}>
         <div className={styles.stickyButton}>

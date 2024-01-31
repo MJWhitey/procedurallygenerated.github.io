@@ -19,6 +19,17 @@ interface SelectedProjectProps {
   onChange?;
 }
 
+interface WorkData {
+  carousel?;
+  body?;
+  agency?;
+  team?;
+  software?;
+  languages?;
+  frameworks?;
+  title?;
+}
+
 const SelectedProject = ({
   height = 0,
   selected = null,
@@ -32,6 +43,7 @@ const SelectedProject = ({
   const [state, setState] = useState({
     currentSlide: 0,
   });
+  const [currentSelected, setCurrentSelected] = useState<WorkData | null>(null)
   const { contextSafe } = useGSAP({ scope: selectedItemContainer });
   const slickSettings: Settings = {
     dots: true,
@@ -42,7 +54,7 @@ const SelectedProject = ({
     slidesToScroll: 1,
     adaptiveHeight: true,
     beforeChange: (prev, next) => {
-      setState({ currentSlide: next });
+      setState((prev) => ({ ...prev, currentSlide: next }));
     },
     customPaging: (i) => (
       <div
@@ -70,8 +82,13 @@ const SelectedProject = ({
       notifyChange();
     }
 
-    if (selected !== null && selected !== "none") {
+    console.log('selected-project - selected : ', selected);
+
+    if (selected !== null && selected !== "none" && selected != currentSelected) {
+      setCurrentSelected(selected);
       animateIn();
+    } else if (selected === null && selected != currentSelected){
+      animateOut();
     }
   }, [selected]);
 
@@ -120,6 +137,7 @@ const SelectedProject = ({
             currentSlide: 0,
           };
         });
+        setCurrentSelected(null);
         if (_.isFunction(onClose)) onClose();
       });
       timelineRef.current = tl;
@@ -201,16 +219,16 @@ const SelectedProject = ({
           ref={selectedItemComponent}
           className={styles.selectedProjectComponent}
         >
-          {selected && (
+          {currentSelected && (
             <>
               <div className={styles.selectedHeader}>
                 <button style={{ flex: 1 }} onClick={onProjectClose}>
                   <img src={`${prefix}/images/close.png`}></img>
                 </button>
-                <h1 style={{ flex: 8 }}>{selected.title}</h1>
+                <h1 style={{ flex: 8 }}>{currentSelected.title}</h1>
                 <div style={{ flex: 1 }}></div>
               </div>
-              {selected.carousel && selected.carousel.length >= 1 && (
+              {currentSelected.carousel && currentSelected.carousel.length >= 1 && (
                 <div
                   className={styles.selectedCarouselContainer}
                   onClick={() => {
@@ -218,22 +236,22 @@ const SelectedProject = ({
                   }}
                 >
                   <Slider ref={slickRef} {...slickSettings}>
-                    {renderCarousel(selected.carousel)}
+                    {renderCarousel(currentSelected.carousel)}
                   </Slider>
                 </div>
               )}
               <div className={styles.selectedBody}>
-                <p>{selected.body}</p>
+                <p>{currentSelected.body}</p>
               </div>
               <div className={styles.selectedDetails}>
                 <div style={{ flex: 1 }}>
-                  {renderList("Agency", [selected.agency])}
-                  {renderList("Team", selected.team)}
+                  {renderList("Agency", [currentSelected.agency])}
+                  {renderList("Team", currentSelected.team)}
                 </div>
                 <div style={{ flex: 1 }}>
-                  {renderList("Languages", [selected.languages])}
-                  {renderList("Frameworks", [selected.frameworks])}
-                  {renderList("Software", [selected.software])}
+                  {renderList("Languages", [currentSelected.languages])}
+                  {renderList("Frameworks", [currentSelected.frameworks])}
+                  {renderList("Software", [currentSelected.software])}
                 </div>
               </div>
             </>
