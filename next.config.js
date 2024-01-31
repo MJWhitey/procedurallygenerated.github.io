@@ -12,7 +12,7 @@ const nextConfig = {
    
     // Optional: Change the output directory `out` -> `dist`
     distDir: 'docs',
-    basePath: '/procedurallygenerated.github.io'
+    basePath: process.env.NEXT_PUBLIC_BASE || '',
   }
    
   // eslint-disable-next-line no-undef

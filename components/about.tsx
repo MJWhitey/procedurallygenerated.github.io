@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./about.module.css";
+import {prefix} from "../utils/prefix";
 
 const About = () => {
   return (
@@ -11,7 +12,7 @@ const About = () => {
         <div className={styles.aboutContent}>
           <img
             className={styles.profilePic}
-            src="/images/profile_pic.png"
+            src={`${prefix}/images/profile_pic.png`}
           ></img>
           <div className={styles.aboutText}>
             <h2>

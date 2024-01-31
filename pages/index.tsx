@@ -12,6 +12,7 @@ import Skills from "../components/skills";
 import Contact from "../components/contact";
 import StickyButton from "../components/sticky-button";
 import { isMobile } from "react-device-detect";
+import { prefix } from "../utils/prefix";
 
 let camera, scene, renderer, effect;
 let plane;
@@ -55,10 +56,9 @@ export default function Main() {
       if (!isHeaderVisible && isVideoPlaying()) video.current.pause();
       if (isHeaderVisible && !isVideoPlaying()) {
         video.current.play();
-        //animate();
       }
     }
-    if( !isWorkVisible && !isHeaderVisible) {
+    if( isWorkVisible === false && isHeaderVisible === false) {
       setState((prev) => ({ ...prev, showScrollToTopBtn: true}))
     }
 
@@ -66,10 +66,6 @@ export default function Main() {
       setState((prev) => ({ ...prev, showScrollToTopBtn: false}))
     }
   }, [isHeaderVisible, isWorkVisible]);
-
-  // useEffect(() => {
-  //   console.log(`The WORK component is ${isHeaderVisible ? "visible" : "not visible"}.`);
-  // }, [isWorkVisible]);
 
   function animate() {
     requestAnimationFrame(animate);
@@ -121,7 +117,7 @@ export default function Main() {
         {/* <source src="/video/computers_1.mov" /> */}
         {/* <source src="/video/pick_me_1.mov" /> */}
         {/* <source src="/video/graphics_1.mov" /> */}
-        <source src="/video/supercut_1.mp4" />
+        <source src={`${prefix}/video/supercut_1.mp4`} />
       </video>
       <canvas
         className={styles.hidden}

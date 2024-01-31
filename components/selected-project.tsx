@@ -10,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { prefix } from "../utils/prefix";
 
 interface SelectedProjectProps {
   height?: number;
@@ -158,7 +159,7 @@ const SelectedProject = ({
         result.push(
           <div className={styles.selectedCarousel}>
             <video width="auto" height="100%" controls>
-              <source src={c} />
+              <source src={prefix + c} />
               Your browser does not support HTML5 video.
             </video>
           </div>
@@ -166,7 +167,7 @@ const SelectedProject = ({
       } else {
         result.push(
           <div className={styles.selectedCarousel}>
-            <img src={`${c}`} />
+            <img src={`${prefix}${c}`} />
           </div>
         );
       }
@@ -204,7 +205,7 @@ const SelectedProject = ({
             <>
               <div className={styles.selectedHeader}>
                 <button style={{ flex: 1 }} onClick={onProjectClose}>
-                  <img src="/images/close.png"></img>
+                  <img src={`${prefix}/images/close.png`}></img>
                 </button>
                 <h1 style={{ flex: 8 }}>{selected.title}</h1>
                 <div style={{ flex: 1 }}></div>

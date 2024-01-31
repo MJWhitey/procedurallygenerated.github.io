@@ -1,0 +1,35 @@
+@font-face {
+    font-family: BarlowSemiCondensed-Regular;
+    src: url(/fonts/BarlowSemiCondensed-Regular.ttf);
+  }
+
+  @font-face {
+    font-family: BarlowSemiCondensed-Italic;
+    src: url(/fonts/BarlowSemiCondensed-Italic.ttf);
+  }
+
+@font-face {
+  font-family: BarlowSemiCondensed-SemiBold;
+  src: url(/fonts/BarlowSemiCondensed-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: BarlowSemiCondensed-SemiBoldItalic;
+  src: url(/fonts/BarlowSemiCondensed-SemiBoldItalic.ttf);
+}
+
+@font-face {
+  font-family: BarlowSemiCondensed-Bold;
+  src: url(/fonts/BarlowSemiCondensed-Bold.ttf);
+}
+
+@font-face {
+  font-family: BarlowSemiCondensed-BoldItalic;
+  src: url(/fonts/BarlowSemiCondensed-BoldItalic.ttf);
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: #1f212a;
+}

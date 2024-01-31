@@ -2,8 +2,9 @@ import React, { useRef } from "react";
 import gsap, { TimelineLite } from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./work-item.module.css";
+import { prefix } from "../utils/prefix";
 
-const IMAGE_ASSETS_PATH = "/images/";
+const IMAGE_ASSETS_PATH = prefix + "/images/";
 
 interface WorkItemProps {
   data;
