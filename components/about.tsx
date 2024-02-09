@@ -22,10 +22,10 @@ const About = () => {
               {`I’m passionate about making outstanding digital products, about exceptional design and nurturing the creative spirit.`}
             </p>
             <p>
-              {`I have a strong foundation and comprehensive experience in front-end technologies, clound backend systems and a background in animation for video, games and web.`}
+              {`I have a strong foundation and comprehensive experience in front-end technologies, cloud backend systems and a background in animation for video, games and web.`}
             </p>
             <p>
-              {` I believe in measuring success by developing thoughtful and achieveable goals, developing strong processes and workflows, `}
+              {` I believe in measuring success by developing thoughtful and achievable goals, developing strong processes and workflows, `}
               {`and in building capable, motivated and complimentary teams that can take on seemingly insurmountable challenges one problem at a time.`}
             </p>
           </div>
