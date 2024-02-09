@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "./prod.sh",
-    "build:github" : "./github.sh",
+    "build:github": "./github.sh",
     "start": "next start",
     "lint": "next lint",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -28,6 +28,7 @@
     "@types/lodash": "^4.14.202",
     "@types/react-slick": "^0.23.13",
     "@types/three": "^0.158.3",
+    "firebase": "^10.7.2",
     "gsap": "^3.12.4",
     "lodash": "^4.17.21",
     "next": "^14.0.3",

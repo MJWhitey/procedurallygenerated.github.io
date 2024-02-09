@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import styles from "../components/header.module.css";
 import root_styles from "../components/index.module.css";
+import GAnalytics from "../utils/analytics";
 
 interface HeaderProps {
   width: number;
@@ -9,6 +10,7 @@ interface HeaderProps {
 
 const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
   function onMenuPressed(item) {
+    GAnalytics.Instance.LogEvent('menu_item_pressed', {title: item});
     const targetScroll = document.querySelector('a[href^="'+item+'"]');
     console.log('targetScroll : ',item, targetScroll);
     if(targetScroll)targetScroll.scrollIntoView({

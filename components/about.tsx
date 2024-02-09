@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./about.module.css";
-import {prefix} from "../utils/prefix";
+import { prefix } from "../utils/prefix";
 
 const About = () => {
   return (
@@ -16,18 +16,17 @@ const About = () => {
           ></img>
           <div className={styles.aboutText}>
             <h2>
-              Hi, I&apos;m <strong>Matt</strong>
+              Hi, I&apos;m <strong>Matt</strong>. <br />I like making digital stuff.
             </h2>
             <p>
-              {`I’m passionate about making outstanding software products, about good design and about nurturing the creative spirit, while creating produts that deliver.`}
+              {`I’m passionate about making outstanding digital products, about exceptional design and nurturing the creative spirit.`}
             </p>
             <p>
-              {`I have a strong foundation and comprehensive experience in all front-end technologies and a background in animation for video and object oriented programming.`}
+              {`I have a strong foundation and comprehensive experience in front-end technologies, clound backend systems and a background in animation for video, games and web.`}
             </p>
             <p>
-              {
-                "I believe in developing strong processes and workflows, and in building capable, motivated and complimentary teams that can take on seemingly insurmountable challenges one problem at a time."
-              }
+              {` I believe in measuring success by developing thoughtful and achieveable goals, developing strong processes and workflows, `}
+              {`and in building capable, motivated and complimentary teams that can take on seemingly insurmountable challenges one problem at a time.`}
             </p>
           </div>
         </div>

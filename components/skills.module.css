@@ -1,6 +1,7 @@
 .skillsContainer{
   composes: aboutContainer from './about.module.css';
   padding-bottom: 140px;
+  padding-top: 0;
 }
 
 .skillsComponent {

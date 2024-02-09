@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from "lodash";
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import styles from "./work.module.css";
 import Data from "../constants/work.js";
@@ -7,6 +7,7 @@ import { isMobile } from "react-device-detect";
 import WorkItem from "./work-item";
 import SelectedProject from "./selected-project";
 import { useIntersectionObserver } from "react-intersection-observer-hook";
+import GAnalytics from "../utils/analytics";
 
 interface WorkGridProps {
   onItemClicked;
@@ -61,9 +62,9 @@ function WorkGrid({ onItemClicked }: WorkGridProps) {
 }
 
 interface WorkProps {
-  showSelectedProject: boolean,
-  onClose?,
-  onChange?,
+  showSelectedProject: boolean;
+  onClose?;
+  onChange?;
 }
 
 const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
@@ -94,15 +95,20 @@ const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
   }, []);
 
   useEffect(() => {
-    console.log('work - selected : ', props.showSelectedProject, state.selected);
+    console.log(
+      "work - selected : ",
+      props.showSelectedProject,
+      state.selected
+    );
 
-    if(props.showSelectedProject === false && state.selected !== null) {
-      setState((prev) => ({...prev, selected: null}));
-      if(_.isFunction(props.onClose)) props.onClose();
+    if (props.showSelectedProject === false && state.selected !== null) {
+      setState((prev) => ({ ...prev, selected: null }));
+      if (_.isFunction(props.onClose)) props.onClose();
     }
-  }, [props.showSelectedProject])
+  }, [props.showSelectedProject]);
 
   const onItemClicked = async (item) => {
+    GAnalytics.Instance.LogEvent("work_item_clicked", { title: item.title });
     if (isMobile) await new Promise((res) => setTimeout(res, 1200));
     if (!isAnchorVisible) {
       const targetScroll = document.querySelector('a[href^="work"]');
@@ -118,14 +124,14 @@ const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
       return { ...prev, selected: item };
     });
 
-    if(_.isFunction(props.onChange)) props.onChange();
+    if (_.isFunction(props.onChange)) props.onChange();
   };
 
   const onSelectedProjectClosed = () => {
     setState((prev) => {
       return { ...prev, selected: null, workHeight: originalHeight.current };
     });
-    if(_.isFunction(props.onClose)) props.onClose();
+    if (_.isFunction(props.onClose)) props.onClose();
   };
 
   const onSelectedProjectChanged = async (height) => {

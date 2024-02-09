@@ -13,6 +13,7 @@ import Contact from "../components/contact";
 import StickyButton from "../components/sticky-button";
 import { isMobile } from "react-device-detect";
 import { prefix } from "../utils/prefix";
+import GAnalytics from "../utils/analytics";
 
 let camera, scene, renderer, effect;
 let plane;
@@ -37,6 +38,7 @@ export default function Main() {
   });
 
   useEffect(() => {
+    GAnalytics.Instance.Initialize();
     initThreeVideoEffect(true, isMobile);
     animate();
     if (video.current && video.current.muted && !isVideoPlaying())
@@ -101,8 +103,9 @@ export default function Main() {
   }
 
   const onStickyButtonPress = () => {
+    GAnalytics.Instance.LogEvent("sticky_button_pressed");
     const targetScroll = document.querySelector('a[href^="work"]');
-    
+
     if (targetScroll) {
       targetScroll.scrollIntoView({
         behavior: "smooth",
@@ -120,7 +123,7 @@ export default function Main() {
   const onWorkChanged = () => {
     console.log("onWorkChanged");
     setState((prev) => ({ ...prev, showSelectedProject: true }));
-  }
+  };
 
   return (
     <div>
