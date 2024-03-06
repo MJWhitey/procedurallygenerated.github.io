@@ -1,0 +1,45 @@
+.assetLoader {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    background-color: #96E2A4;
+}
+
+.assetLoaderContainer {
+    text-align: center;
+    width: 350px;
+}
+
+.assetLoader h1 {
+    font-family: 'BarlowSemiCondensed-BoldItalic';
+    font-size: 24px;
+    color: #1F212A;
+}
+
+.assetLoader h2 {
+    margin-top: 40px;
+    font-family: 'BarlowSemiCondensed-ThinItalic';
+    font-size: 18px;
+    color: #1F212A;
+}
+
+.assetLoaderIndicatorContainer {
+    border-color: #1F212A80;
+    border-width: 1px;
+    border-radius: 4px;
+    border-style: solid;
+    margin-top: 40px;
+    width: 180px;
+    padding: 3px;
+}
+
+.assetLoaderIndicator {
+    background-color: #1F212A80;
+    width: 10%;
+    height: 1px;
+}

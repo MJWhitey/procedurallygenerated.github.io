@@ -28,6 +28,11 @@
   src: url(/fonts/BarlowSemiCondensed-BoldItalic.ttf);
 }
 
+@font-face {
+  font-family: BarlowSemiCondensed-ThinItalic;
+  src: url(/fonts/BarlowSemiCondensed-ThinItalic.ttf);
+}
+
 body {
   margin: 0;
   overflow-x: hidden;
