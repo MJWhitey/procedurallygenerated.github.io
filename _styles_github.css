@@ -33,6 +33,16 @@
   src: url(https://mjwhitey.github.io/procedurallygenerated.github.io/fonts/BarlowSemiCondensed-ThinItalic.ttf);
 }
 
+@font-face {
+  font-family: BarlowCondensed-BoldItalic;
+  src: url(https://mjwhitey.github.io/procedurallygenerated.github.io/fonts/BarlowCondensed-BoldItalic.ttf);
+}
+
+@font-face {
+  font-family: BarlowCondensed-ThinItalic;
+  src: url(https://mjwhitey.github.io/procedurallygenerated.github.io/fonts/BarlowCondensed-ThinItalic.ttf);
+}
+
 body {
   margin: 0;
   overflow-x: hidden;

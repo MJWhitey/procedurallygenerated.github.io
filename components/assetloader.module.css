@@ -16,14 +16,15 @@
 }
 
 .assetLoader h1 {
-    font-family: 'BarlowSemiCondensed-BoldItalic';
+    font-family: 'BarlowCondensed-BoldItalic';
     font-size: 24px;
     color: #1F212A;
+    text-shadow: 0 1px white;
 }
 
 .assetLoader h2 {
     margin-top: 40px;
-    font-family: 'BarlowSemiCondensed-ThinItalic';
+    font-family: 'BarlowCondensed-ThinItalic';
     font-size: 18px;
     color: #1F212A;
 }
