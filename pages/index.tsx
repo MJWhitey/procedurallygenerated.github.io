@@ -195,6 +195,7 @@ export default function Main() {
                 <AssetLoader
                     visible={!state.videoBuffered}
                     onLoaderComplete={onLoaderComplete}
+                    windowHeight={state.screen.height}
                 />
             )}
         </div>

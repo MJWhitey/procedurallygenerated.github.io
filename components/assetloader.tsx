@@ -9,6 +9,7 @@ import { prefix } from "../utils/prefix";
 interface AssetLoaderProps {
     visible?: boolean;
     onLoaderComplete?;
+    windowHeight?: number;
 }
 
 const assets: string[] = [
@@ -35,11 +36,13 @@ const assets: string[] = [
 const AssetLoader = ({
     visible = false,
     onLoaderComplete = () => {},
+    windowHeight,
 }: AssetLoaderProps) => {
     //
     //
     const preloadRef = useRef<HTMLDivElement>(null);
     const indicatorRef = useRef<HTMLDivElement>(null);
+    const indicatorContainerRef = useRef<HTMLDivElement>(null);
     const { contextSafe } = useGSAP({ scope: preloadRef });
     const timelineRef = useRef<TimelineLite | null>(null);
     const [state, setState] = useState({
@@ -68,6 +71,10 @@ const AssetLoader = ({
         tl.call(() => {
             setState((prev) => ({ ...prev, visible }));
         });
+        tl.to(indicatorContainerRef.current as gsap.TweenTarget, {
+            alpha: 0,
+            duration: 0.4,
+        });
         tl.delay(1.2);
         tl.fromTo(
             preloadRef.current as gsap.TweenTarget,
@@ -83,7 +90,6 @@ const AssetLoader = ({
         console.log("updateIndicator - percent : ", percent);
         if (timelineRef.current) timelineRef.current.kill();
         const tl = gsap.timeline();
-
         tl.to(indicatorRef.current as gsap.TweenTarget, {
             width: `${imagesPercentLoaded}%`,
             alpha: 1,
@@ -93,8 +99,8 @@ const AssetLoader = ({
     });
 
     return (
-        <div ref={preloadRef} className={styles.assetLoader}>
-            <div className={styles.assetLoaderContainer}>
+        <div ref={preloadRef} className={styles.assetLoader} style={{height: windowHeight ? windowHeight : '100vh'}}>
+            <div className={styles.assetLoaderContainer} >
                 <h1>
                     Perfection is achieved, not when
                     <br /> there is nothing left to add, but when there is
@@ -102,7 +108,7 @@ const AssetLoader = ({
                 </h1>
                 <h2>Antoine de Saint-Exupéry</h2>
             </div>
-            <div className={styles.assetLoaderIndicatorContainer}>
+            <div ref={indicatorContainerRef} className={styles.assetLoaderIndicatorContainer}>
                 <div
                     ref={indicatorRef}
                     className={styles.assetLoaderIndicator}
