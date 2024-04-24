@@ -29,6 +29,7 @@ const Work = {
         "/images/projects/rag/ready_attn_go_6.jpg",
         "/video/projects/rag/rago_elf_spine.mp4",
         "/video/projects/rag/ready_attn_go_reel.mp4",
+        "/video/projects/rag/tali_auto_test.mp4",
       ],
     },
     {
@@ -191,7 +192,12 @@ const Work = {
       languages: "C#",
       frameworks: "Unity",
       software: "Cinema 4d, Adobe CC",
-      carousel: ["/video/projects/westfield/westfield.mp4"],
+      carousel: [
+        "/video/projects/westfield/westfield.mp4",
+        "/images/projects/westfield/westfield_1.jpg",
+        "/images/projects/westfield/westfield_2.jpg",
+        "/images/projects/westfield/westfield_3.jpg",
+      ],
     },
     {
       title: "Mazda Soft Top Gift Drop",
@@ -244,10 +250,10 @@ const Work = {
       frameworks: "Robotlegs MVC",
       software: "Adobe Flash, Adobe AIR, Telentice",
       carousel: [
-        '/images/projects/wonderwall/wonderwall_1.jpg',
-        '/images/projects/wonderwall/wonderwall_2.jpg',
-        '/images/projects/wonderwall/wonderwall_3.jpg',
-      ]
+        "/images/projects/wonderwall/wonderwall_1.jpg",
+        "/images/projects/wonderwall/wonderwall_2.jpg",
+        "/images/projects/wonderwall/wonderwall_3.jpg",
+      ],
     },
   ],
 };
