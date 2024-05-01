@@ -14,7 +14,7 @@ const SkillsList = ({ children, shaded = false }: SkillListProps) => {
       }
     >
       <div className={skills_styles.cellSpacer} />
-      <ul>{children}</ul>
+      {children}
       <div className={skills_styles.cellSpacer} />
     </div>
   );
