@@ -185,7 +185,7 @@ const SelectedProject = ({
       } else {
         result.push(
           <div className={styles.selectedCarousel}>
-            <img src={`${prefix}${c}`} />
+            <img src={`${prefix}${c}`} alt={`${currentSelected?.title} carousel image`}/>
           </div>
         );
       }
@@ -223,7 +223,7 @@ const SelectedProject = ({
             <>
               <div className={styles.selectedHeader}>
                 <button style={{ flex: 1 }} onClick={onProjectClose}>
-                  <img src={`${prefix}/images/close.png`}></img>
+                  <img src={`${prefix}/images/close.png`} alt="close button"></img>
                 </button>
                 <h1 style={{ flex: 8 }}>{currentSelected.title}</h1>
                 <div style={{ flex: 1 }}></div>

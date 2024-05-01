@@ -13,6 +13,7 @@ const About = () => {
           <img
             className={styles.profilePic}
             src={`${prefix}/images/profile_pic.png`}
+            alt='Matthew White looking simultaneously professional and thoughtful.'
           ></img>
           <div className={styles.aboutText}>
             <h2>
