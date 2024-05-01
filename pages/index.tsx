@@ -110,7 +110,7 @@ export default function Main() {
 
     const onStickyButtonPress = () => {
         GAnalytics.Instance.LogEvent("sticky_button_pressed");
-        const targetScroll = document.querySelector('a[href^="work"]');
+        const targetScroll = document.querySelector('div[id^="work"]');
 
         if (targetScroll) {
             targetScroll.scrollIntoView({

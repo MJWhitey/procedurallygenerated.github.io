@@ -4,8 +4,7 @@ import { prefix } from "../utils/prefix";
 
 const About = () => {
   return (
-    <div className={styles.aboutContainer}>
-      <a href="about" />
+    <div id="about" className={styles.aboutContainer}>
       <div className={styles.componentContainer}>
         <h1>About</h1>
         <hr></hr>

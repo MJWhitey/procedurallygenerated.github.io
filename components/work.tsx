@@ -111,7 +111,7 @@ const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
     GAnalytics.Instance.LogEvent("work_item_clicked", { title: item.title });
     if (isMobile) await new Promise((res) => setTimeout(res, 1200));
     if (!isAnchorVisible) {
-      const targetScroll = document.querySelector('a[href^="work"]');
+      const targetScroll = document.querySelector('div[id^="work"]');
       console.log("targetScroll : ", targetScroll);
       if (targetScroll)
         targetScroll.scrollIntoView({
@@ -145,7 +145,7 @@ const Work = forwardRef<HTMLDivElement, WorkProps>((props, ref) => {
 
   return (
     <div style={{ overflow: "hidden" }}>
-      <a ref={anchor} href="work" />
+      <div ref={anchor} id="work" />
       <SelectedProject
         height={state.workHeight}
         selected={state.selected}

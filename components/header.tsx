@@ -11,7 +11,7 @@ interface HeaderProps {
 const Header = forwardRef<HTMLDivElement, HeaderProps>((props, ref) => {
   function onMenuPressed(item) {
     GAnalytics.Instance.LogEvent('menu_item_pressed', {title: item});
-    const targetScroll = document.querySelector('a[href^="'+item+'"]');
+    const targetScroll = document.querySelector('div[id^="'+item+'"]');
     console.log('targetScroll : ',item, targetScroll);
     if(targetScroll)targetScroll.scrollIntoView({
       behavior: "smooth",
