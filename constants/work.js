@@ -33,6 +33,30 @@ const Work = {
       ],
     },
     {
+      title: "HOOGA",
+      technology: ["React Native", "Expo", "GraphQL", "Google Cloud", "AWS"],
+      thumbnail: "tint_blue_hooga.png",
+      body: `HOOGA is a social media disruptor that re-imagines how people collate photos.
+      HOOGA makes use of geolocation and facial recognition technology to tag users and align guest 
+      contributions with events making content creation, networking and organising seamless and intuitive. 
+      As Lead Platform Engineer I acted a in a full stack role, developing new product features while ensuring 
+      the application's entire architecture was modular, portable and could scale to meet the business need.`,
+      agency: "HOOGA",
+      team: [
+        "Belinda Bukcley - Director",
+        "Matthew Rose - Chief Technology Officer",
+        "Matthew White - Lead Platform Engineer",
+        "Zach Qin - Senior Developer",
+      ],
+      languages: "Javascript, Typescript, GraphQL",
+      frameworks: "Expo, Serverless, AWS",
+      software: "VS Code, XCode, Android Studio",
+      carousel: [
+        "/video/projects/hooga/hooga_1.mp4",
+        "/images/projects/hooga/hooga_1.png",
+      ],
+    },
+    {
       title: "Full Tilt VR",
       technology: ["C#", "Unity", "VR"],
       thumbnail: "tint_blue_fulltilt.png",
@@ -150,6 +174,29 @@ const Work = {
       ],
     },
     {
+      title: "Cochlear",
+      technology: ["NodeJS", "React"],
+      thumbnail: "tint_blue_cochlear.png",
+      body: `Cochlear engaged CHE Proximity to develop a web browser utility that improved
+      the audio experience for users who may have impairments. The creative technology team 
+      followed a comprehensive product development process to build an audio optimising extension 
+      that could be easily installed on users browser by following a short audio-visual configurator.`,
+      agency: "CHE Proximity",
+      team: [
+        "Matthew White - Creative Technologist",
+      ],
+      languages: "Javascript",
+      frameworks: "NodeJS, React",
+      software: "VS Code",
+      carousel: [
+        "/images/projects/cochlear/cochlear_1.jpg",
+        "/images/projects/cochlear/cochlear_2.jpg",
+        "/images/projects/cochlear/cochlear_3.jpg",
+        "/images/projects/cochlear/cochlear_4.jpg",
+        "/images/projects/cochlear/cochlear_5.jpg",
+      ],
+    },
+    {
       title: "Vivid Festival",
       technology: ["C#", "Unity"],
       thumbnail: "tint_blue_vivid.png",
@@ -197,6 +244,31 @@ const Work = {
         "/images/projects/westfield/westfield_1.jpg",
         "/images/projects/westfield/westfield_2.jpg",
         "/images/projects/westfield/westfield_3.jpg",
+      ],
+    },
+    {
+      title: "MCEC",
+      technology: ["Flash", "Actionscript", "Telentice"],
+      thumbnail: "tint_blue_mcec.png",
+      body: `Melbourne Convention and Exhibition center was keen to find a way to
+      make their lare public space feel more vibrant and active for visitors. To this end, 
+      we produced a series of playful animated infographics that drew on live 
+      facility usage data. The resulting screens revealed unique insights in to 
+      the centers inner workings to guests.`,
+      agency: "DT Digital",
+      team: [
+        "Tim Devine - Creative Technologist",
+        "Callan Rowe - Designer",
+        "Matthew White - Senior Developer",
+      ],
+      languages: "Actionscript",
+      frameworks: "Telentice",
+      software: "Adobe Flash",
+      carousel: [
+        "/images/projects/mcec/mcec_2.jpg",
+        "/images/projects/mcec/mcec_3.jpg",
+        "/images/projects/mcec/mcec_4.jpg",
+        "/images/projects/mcec/mcec_1.png",
       ],
     },
     {
