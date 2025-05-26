@@ -38,7 +38,7 @@ const Work = {
       thumbnail: "tint_blue_hooga.png",
       body: `HOOGA is a social media disruptor that re-imagines how people collate photos.
       HOOGA makes use of geolocation and facial recognition technology to tag users and align guest 
-      contributions with events making content creation, networking and organising seamless and intuitive. 
+      contributions with events. This makes content creation, networking and organising seamless and intuitive. 
       As Lead Platform Engineer I acted a in a full stack role, developing new product features while ensuring 
       the application's entire architecture was modular, portable and could scale to meet the business need.`,
       agency: "HOOGA",
@@ -250,8 +250,8 @@ const Work = {
       title: "MCEC",
       technology: ["Flash", "Actionscript", "Telentice"],
       thumbnail: "tint_blue_mcec.png",
-      body: `Melbourne Convention and Exhibition center was keen to find a way to
-      make their lare public space feel more vibrant and active for visitors. To this end, 
+      body: `Melbourne Convention and Exhibition Center was keen to find a way to
+      make their public space feel more vibrant and active for visitors. To this end, 
       we produced a series of playful animated infographics that drew on live 
       facility usage data. The resulting screens revealed unique insights in to 
       the centers inner workings to guests.`,

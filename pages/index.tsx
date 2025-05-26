@@ -171,7 +171,8 @@ export default function Main() {
                 width="500"
                 height="500"
             ></canvas>
-            <div id="root" className={styles.rootContainer}>
+            <div id="root" className={styles.rootContainer} 
+            style={{display : state.assetsLoaded ? 'inline' : 'none'}}>
                 <Header
                     ref={observedHeader}
                     width={state.screen.width}
