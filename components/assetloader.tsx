@@ -8,7 +8,8 @@ import { prefix } from "../utils/prefix";
 
 interface AssetLoaderProps {
   visible?: boolean;
-  onLoaderComplete?;
+  onLoaderComplete?: () => void;
+  onLoaderAnimationComplete?: () => void;
   windowHeight?: number;
 }
 
@@ -36,6 +37,7 @@ const assets: string[] = [
 const AssetLoader = ({
   visible = false,
   onLoaderComplete = () => {},
+  onLoaderAnimationComplete = () => {},
   windowHeight,
 }: AssetLoaderProps) => {
   //
@@ -57,6 +59,7 @@ const AssetLoader = ({
     console.log("AssetLoader ", visible, imagesPreloaded, imagesPercentLoaded);
     updateIndicator(Math.min(imagesPercentLoaded, 100));
     if (imagesPreloaded && state.visible === true) {
+      onLoaderComplete();
       animateOut();
     }
   }, [visible, imagesPreloaded, imagesPercentLoaded]);
@@ -67,32 +70,33 @@ const AssetLoader = ({
     const tl = gsap.timeline();
     tl.call(() => {
       setState((prev) => ({ ...prev, visible }));
-    });
-    tl.to(headerRef.current as gsap.TweenTarget, {
-      alpha: 0,
-      y: 10,
-      duration: 0.2,
-    });
-    tl.to(attributionRef.current as gsap.TweenTarget, {
+    })
+      .to(indicatorContainerRef.current as gsap.TweenTarget, {
         alpha: 0,
         y: 10,
         duration: 0.2,
-        delay: -0.1,
-      });
-      tl.to(indicatorContainerRef.current as gsap.TweenTarget, {
+      })
+      .to({}, { duration: 2.0 })
+      .to(attributionRef.current as gsap.TweenTarget, {
         alpha: 0,
         y: 10,
-        duration: 0.2,
+        duration: 0.4,
+      })
+      .to(headerRef.current as gsap.TweenTarget, {
+        alpha: 0,
+        y: 10,
+        duration: 0.4,
+      })
+      .fromTo(
+        preloadRef.current as gsap.TweenTarget,
+        { y: 0, alpha: 1 },
+        { y: "-100%", alpha: 1, duration: 0.8, ease: "expo.inOut" },
+      )
+      .pause()
+      .call(() => {
+        onLoaderAnimationComplete();
       });
-    tl.delay(1.2);
-    tl.fromTo(
-      preloadRef.current as gsap.TweenTarget,
-      { y: 0, alpha: 1 },
-      { y: "-100%", alpha: 1, duration: 1.2, ease: "expo.inOut" }
-    );
-    tl.call(() => {
-      onLoaderComplete();
-    });
+    tl.play();
   });
 
   const updateIndicator = contextSafe((percent) => {

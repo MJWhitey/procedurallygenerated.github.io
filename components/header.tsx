@@ -4,7 +4,7 @@ import root_styles from "../components/index.module.css";
 import GAnalytics from "../utils/analytics";
 
 interface HeaderProps {
-  width: number;
+  width?: number;
   height: number;
 }
 
